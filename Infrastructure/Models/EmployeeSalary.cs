@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Infrastructure.Models
+{
+    public class EmployeeSalary : FullAuditEntity
+    {
+        
+        public string EmployeeId { get; set; }
+        public virtual Employee Employee { get; set; }
+
+
+
+        [Required]
+        public float BasicSalary { get; set; }
+
+        public float TransportAllowance { get; set; }
+        public float HomeAllowance { get; set; }
+        public float OtherAllowance { get; set; }
+
+
+        public SalaryStatus SalaryStatus { get; set; }
+    }
+
+    public enum SalaryStatus
+    {
+        [Display(Name="Active")] Active,
+        [Display(Name="In-Active")] InActive
+    }
+}
