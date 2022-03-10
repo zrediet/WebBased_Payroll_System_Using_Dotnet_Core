@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@*@model List<Infrastructure.Models.SemesterCourseOfferingChild>*@
+@model IEnumerable<Infrastructure.Models.Attendance>
+
+@if (Model.Any())
+{ 
+    <table class="datatable datatable-bordered datatable-head-bg" id="kt_datatable">
+        <thead>
+            <tr>
+                <th title="Field #1">Employee ID</th>
+                <th title="Field #2">Full Name</th>
+                <th title="Field #3">From</th>
+                <th title="Field #4">To</th>
+                <th title="Field #5">No Days</th>
+                <th title="Field #6">Normal OT</th>
+                <th title="Field #7">Normal OT 2</th>
+                <th title="Field #8">Weekend OT</th>
+                <th title="Field #9">Holyday OT</th>
+                <th title="Field #10">Creation Time</th>
+                <th title="Field #11">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.From)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.To)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NormalOT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NormalOT2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.WeekendOT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HolyDayOT)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationTime)
+                    </td>
+                    <td>
+                        <a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="@item.Id"></a>
+                        <a class="btn flaticon-list-1 text-info" asp-action="Details" asp-route-id="@item.Id"></a>
+                        <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="@item.Id"></a>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+}

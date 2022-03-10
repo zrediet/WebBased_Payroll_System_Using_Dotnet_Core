@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Infrastructure.Models.Attendance>
+﻿@using Infrastructure.Models
+@model IEnumerable<Infrastructure.Models.Attendance>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,84 +7,6 @@
     int rowNumber = 0;
 }
 
-@*<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NoDays)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatorUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastModificationTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastModifierUserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsDeleted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeletionTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DeleterUserId)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NoDays)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatorUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModificationTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastModifierUserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeleted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeletionTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeleterUserId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-*@
 
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
     <!--begin::Subheader-->
@@ -115,128 +38,86 @@
             <!--end::Toolbar-->
         </div>
     </div>
-    
+
     <div class="card card-custom">
-    <div class="card-header flex-wrap border-0 pt-6 pb-0">
-        <div class="card-title">
-            <h3 class="card-label">
-                Attendances
-                <span class="d-block text-muted pt-2 font-size-sm">Currently Active Attendance List</span>
-            </h3>
-        </div>
-        <div class="card-toolbar">
+        <div class="card-header">
+            @*flex-wrap border-0 pt-6 pb-0*@
+            @*<div class="card-title">
+                    <h3 class="card-label">
+                        Attendances
+                        <span class="d-block text-muted pt-2 font-size-sm">Currently Active Attendance List</span>
+                    </h3>
+                </div>*@
 
-            <!--begin::Button-->
-            <a asp-action="Create" asp-controller="Attendances" class="btn btn-primary font-weight-bolder">
-                <span class="svg-icon svg-icon-md">
-                    <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <rect x="0" y="0" width="24" height="24" />
-                            <circle fill="#000000" cx="9" cy="15" r="6" />
-                            <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
-                        </g>
-                    </svg>
-                    <!--end::Svg Icon-->
-                </span>	New Attendance
-            </a>
-            <!--end::Button-->
-        </div>
-    </div>
-    <div class="card-body">
-        <!--begin: Search Form-->
-        <!--begin::Search Form-->
-        <div class="mb-7">
-            <div class="row align-items-center">
-                <div class="col-lg-9 col-xl-8">
-                    <div class="row align-items-center">
-                        <div class="col-md-4 my-2 my-md-0">
-                            <div class="input-icon">
-                                <input type="text" class="form-control" placeholder="Search..." id="kt_datatable_search_query" />
-                                <span><i class="flaticon2-search-1 text-muted"></i></span>
-                            </div>
+
+
+            <div class="card-toolbar">
+                <div class="row">
+
+                    <div class="col col-sm-3">
+                        <div class="form-group">
+                            <label>Start From:</label>
+                            <input type="date" class="form-control" placeholder="Start From" id="from" />
                         </div>
+                    </div>
 
-                        <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                            Search
-                        </a>
+                    <div class="col col-sm-3">
+                        <div class="form-group">
+                            <label>To :</label>
+                            <input type="date" class="form-control" placeholder="To" id="to" />
+                        </div>
+                    </div>
+                    <div class="col col-sm-3">
+                        <div class="form-group">
+                            <label>Division :</label>
+                            <select type="text" class="form-control form-control-solid" asp-items=ViewBag.DivisionId id="division" required>
+                                <option>Select Division</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="form-group">
+                            <label>Search :</label>
+                            <button class="btn btn-hover-info form-control form-control-solid" type="submit"><i class="flaticon2-search text-primary"></i> Search</button>
+                        </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-        <!--end::Search Form-->
-        <!--end: Search Form-->
-        <!--begin: Datatable-->
-        <table class="datatable datatable-bordered datatable-head-bg" id="kt_datatable">
-            <thead>
-                <tr>
-                    <th title="Field #1">Employee ID</th>
-                    <th title="Field #2">Full Name</th>
-                    <th title="Field #3">From</th>
-                    <th title="Field #4">To</th>
-                    <th title="Field #5">No Days</th>
-                    <th title="Field #6">Normal OT</th>
-                    <th title="Field #7">Normal OT 2</th>
-                    <th title="Field #8">Weekend OT</th>
-                    <th title="Field #9">Holyday OT</th>
-                    <th title="Field #10">Creation Time</th>
-                    <th title="Field #11">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    rowNumber++;
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Employee.EmployeeId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.From)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.To)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NoDays)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NormalOT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.NormalOT2)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.WeekendOT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.HolyDayOT)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreationTime)
-                        </td>
-                        <td>
-                            <a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="@item.Id"></a>
-                            <a class="btn flaticon-list-1 text-info" asp-action="Details" asp-route-id="@item.Id"></a>
-                            <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="@item.Id"></a>
-                        </td>
-                    </tr>    
-                }
+                <div class="row">
+                    <a asp-action="Create" asp-controller="Attendances" class="btn btn-primary font-weight-bolder">
+                        <span class="svg-icon svg-icon-md">
+                            <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg-->
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24" />
+                                    <circle fill="#000000" cx="9" cy="15" r="6" />
+                                    <path d="M8.8012943,7.00241953 C9.83837775,5.20768121 11.7781543,4 14,4 C17.3137085,4 20,6.6862915 20,10 C20,12.2218457 18.7923188,14.1616223 16.9975805,15.1987057 C16.9991904,15.1326658 17,15.0664274 17,15 C17,10.581722 13.418278,7 9,7 C8.93357256,7 8.86733422,7.00080962 8.8012943,7.00241953 Z" fill="#000000" opacity="0.3" />
+                                </g>
+                            </svg>
+                            <!--end::Svg Icon-->
+                        </span> New Attendance
+                    </a>
+                </div>
 
-                
-            </tbody>
-        </table>
-        <!--end: Datatable-->
+                <!--begin::Button-->
+                <!--end::Button-->
+            </div>
+
+        </div>
+        <div class="card-body">
+            <!--begin: Search Form-->
+            <!--begin::Search Form-->
+            <!--end::Search Form-->
+            <!--end: Search Form-->
+            <!--begin: Datatable-->
+            @*@await Component.InvokeAsync("AttendanceList", @ViewBag.studentId)*@
+
+            <!--end: Datatable-->
+        </div>
     </div>
 </div>
-</div>
 <!--begin::Card-->
-
-
 <!--end::Card-->
 
 <script>
@@ -316,4 +197,3 @@
 <script src="~/assets/js/pages/crud/datatables/basic/basic.js"></script>
 
 
- 

@@ -21,6 +21,7 @@ namespace Payroll
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseUrls("http://*:8090");
                     webBuilder.UseStartup<Startup>();
                 });
     }

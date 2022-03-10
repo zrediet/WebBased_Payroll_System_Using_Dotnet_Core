@@ -22,8 +22,13 @@ namespace Payroll.Controllers
         // GET: Attendances
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Attendances.Include(a => a.Employee).Where(c=>c.IsDeleted == false);
-            return View(await applicationDbContext.ToListAsync());
+            //var applicationDbContext = _context.Attendances.Include(a => a.Employee).Where(c=>c.IsDeleted == false);
+            //await applicationDbContext.ToListAsync();
+
+            var divisionList = await _context.Divisions.Where(c => c.IsDeleted == false).OrderBy(a=>a.DivisionName).ToListAsync();
+            ViewData["DivisionId"] = new SelectList(divisionList, "Id", "DivisionName");
+
+            return View();
         }
 
         // GET: Attendances/Details/5
@@ -47,8 +52,7 @@ namespace Payroll.Controllers
 
         // GET: Attendances/Create
         public IActionResult Create()
-        {   
-
+        {
             var empList = _context.Employees.Where(c => c.IsDeleted == false)
                 .Select(s => new
                 {

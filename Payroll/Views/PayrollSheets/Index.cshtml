@@ -6,128 +6,7 @@
     int rowNumber = 0;
 }
 
-@*<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Employee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PayStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PayEnd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PaymentRound)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BasicSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Allowance)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OverTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GrossSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IncomeTax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PensionEmployee)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PensionCompany)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Loan)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Penality)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OtherDeduction)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NetPay)
-        </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.NonTaxableAllowance)
-            </th> 
-             
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayStart)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PayEnd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentRound)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasicSalary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Allowance)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OverTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GrossSalary)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IncomeTax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PensionEmployee)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PensionCompany)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Loan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Penality)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OtherDeduction)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NetPay)
-            </td>
-            @* <td>
-                @Html.DisplayFor(modelItem => item.NonTaxableAllowance)
-            </td> 
-             
-            <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> @*|
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
-*@
-
+ 
 
 
 <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
@@ -146,10 +25,7 @@
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
 
                 <span class="text-muted font-weight-bold mr-4">Payroll</span>
-
-                @*<a href="#" class="btn btn-light-warning font-weight-bolder btn-sm">
-                        Add New
-                    </a>*@
+ 
                 <!--end::Actions-->
             </div>
             <!--end::Info-->
