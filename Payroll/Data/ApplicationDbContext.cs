@@ -20,7 +20,7 @@ namespace Payroll.Data
         public DbSet<DeductionPaymentHistory> DeductionPaymentHistories { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmployeeFamily> EmployeeFamilies { get; set; }
+        //public DbSet<EmployeeFamily> EmployeeFamilies { get; set; }
         public DbSet<EmployeeSalary> EmployeeSalaries { get; set; }
         public DbSet<Log> Logs { get; set; }
         public DbSet<PayrollSetting> PayrollSettings { get; set; }

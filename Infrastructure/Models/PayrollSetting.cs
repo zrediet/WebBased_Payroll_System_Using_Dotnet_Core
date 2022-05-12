@@ -27,7 +27,8 @@ namespace Infrastructure.Models
         [Display(Name = "Normal OT")] NormalOT,
         [Display(Name = "Normal OT 2")] NormalOT2,
         [Display(Name = "Weekend OT")] WeekendOT, 
-        [Display(Name = "HolyDay OT")] HolidayOT, 
+        [Display(Name = "HolyDay OT")] HolidayOT,
+        [Display(Name = "Payment Date")] PaymentDate
     }
 
 }
