@@ -23,9 +23,7 @@ namespace Payroll.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            var employee = await _context.Employees.Include(c => c.Project)
-                .Include(d => d.Division)
-                .Include(s=>s.SubProject)
+            var employee = await _context.Employees.Include(d => d.Department)
                 .Where(a=>a.IsDeleted == false)
                 .ToListAsync();
 
@@ -43,9 +41,8 @@ namespace Payroll.Controllers
             //var employee = await _context.Employees
             //    .FirstOrDefaultAsync(m => m.Id == id);
 
-            var employee = await _context.Employees.Include(c => c.Project)
-                .Include(d => d.Division)
-                .Include(s=>s.SubProject).FirstOrDefaultAsync(m=>m.Id==id);
+            var employee = await _context.Employees.Include(d => d.Department)
+                .FirstOrDefaultAsync(m=>m.Id==id);
 
             if (employee == null)
             {
@@ -59,9 +56,9 @@ namespace Payroll.Controllers
         public IActionResult Create()
         {
             ViewBag.EmpId = GenerateEmployeeId();
-            ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
-            ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
-            ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
+            //ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
+            //ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
+            //ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
             return View();
         }
 
@@ -98,9 +95,9 @@ namespace Payroll.Controllers
             }
 
             ViewBag.EmpId = GenerateEmployeeId();
-            ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
-            ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
-            ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
+            //ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
+            //ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
+            //ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
 
             return View(registration);
         }
@@ -108,9 +105,9 @@ namespace Payroll.Controllers
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
-            ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
-            ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
-            ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
+            //ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
+            //ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
+            ViewData["DivisionId"] = new SelectList(_context.Departments.OrderBy(c=>c.DepartmentName), "Id", "DepartmentName");
 
             if (id == null)
             {
@@ -118,9 +115,8 @@ namespace Payroll.Controllers
             }
 
             //var employee = await _context.Employees.FindAsync(id);
-            var employee = await _context.Employees.Include(c => c.Project)
-                .Include(d => d.Division)
-                .Include(s=>s.SubProject).FirstOrDefaultAsync(m=>m.Id==id);
+            var employee = await _context.Employees.Include(d => d.Department)
+                .FirstOrDefaultAsync(m=>m.Id==id);
 
             if (employee == null)
             {

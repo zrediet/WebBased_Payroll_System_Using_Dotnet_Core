@@ -25,15 +25,30 @@ namespace Infrastructure.Models
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime To { get; set; }
 
-        [Display(Name = "No. Days")]
-        public int NoDays { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
+        public DateTime Date { get; set; }
 
-        [Display(Name = "Normal OT")] public int NormalOT { get; set; }
-        [Display(Name = "Normal OT 2")] public int NormalOT2 { get; set; }
-        [Display(Name = "Weekend OT")]public int WeekendOT { get; set; }
-        [Display(Name = "HolyDay OT")] public int HolyDayOT { get; set; }
+        public AttendanceType AttendanceType { get; set; }
+        public Reason? Reason { get; set; }
+        public string Remark { get; set; }
+         
+    }
 
+    public enum AttendanceType
+    {
+        [Display(Name = "Absent")] Absent,
+        [Display(Name = "Available")] Available,
+        [Display(Name = "Day Off")] Day_Off,
+        [Display(Name = "Holiday")] Holiday,
+        [Display(Name = "On Leave")] On_Leave,
+        [Display(Name = "Reason")] Reason
+    }
 
-
+    public enum Reason
+    {
+        [Display(Name="Sick Leave")] Sick_leave,
+        [Display(Name="On Field")] on_field,
+        [Display(Name="Other")] Other
     }
 }

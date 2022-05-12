@@ -22,7 +22,7 @@ namespace Payroll.Controllers
         // GET: PayrollSettings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.PayrollSettings.ToListAsync());
+            return View(await _context.PayrollSettings.Where(p=>p.IsDeleted == false).ToListAsync());
         }
 
         // GET: PayrollSettings/Details/5
@@ -60,6 +60,15 @@ namespace Payroll.Controllers
             payrollSetting.CreationTime = DateTime.Today;
             payrollSetting.CreatorUserId = "";
             payrollSetting.IsDeleted = false;
+
+            //check if there is already registered Setting that is currently Active? If Active prompt to De-Activate
+            var check = _context.PayrollSettings.Where(s =>
+                s.GeneralPSett == payrollSetting.GeneralPSett && s.IsDeleted == false);
+            
+            if (check.Any())
+            {
+                ModelState.AddModelError("GeneralPSett","There is active setting for "+ payrollSetting.GeneralPSett+" please De-Activate/ Delete first.");
+            }
 
 
             if (ModelState.IsValid)
@@ -146,7 +155,10 @@ namespace Payroll.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var payrollSetting = await _context.PayrollSettings.FindAsync(id);
-            _context.PayrollSettings.Remove(payrollSetting);
+            payrollSetting.IsDeleted = true;
+            payrollSetting.DeletionTime = DateTime.Now;
+
+            _context.PayrollSettings.Update(payrollSetting);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

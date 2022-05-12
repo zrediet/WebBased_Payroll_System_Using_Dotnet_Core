@@ -18,18 +18,17 @@ namespace Payroll.Components
             _context = context;
         }
 
-        public async Task<IViewComponentResult> ViewAttendanceList(DateTime from, DateTime to, PaymentRound round, string division)
+        public async Task<IViewComponentResult> InvokeAsync(DateTime from, DateTime to, string division)
         {
-            //if (division != null)
-            //{
-            //    ModelState.AddModelError("","Please Select Division");
-            //}
-
+            if (division != null)
+            {
+                ModelState.AddModelError("", "Please Select Department");
+            }
 
             var attendance = await _context.Attendances
                 .Include(a => a.Employee)
                 .Where(c => c.From >= from && c.To <= to && 
-                            c.Employee.DivisionId == division && 
+                            c.Employee.DepartmentId == division && 
                             c.IsDeleted == false).ToListAsync();
             return View("AttendanceList",attendance);
         }

@@ -1,9 +1,10 @@
-﻿@model Infrastructure.Models.Attendance
+﻿@using Infrastructure.Models
+@model Infrastructure.Models.Attendance
 
 @{
     ViewData["Title"] = "Create";
 }
- 
+
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />        <!--end::Fonts-->
 <!--begin::Global Theme Styles(used by all pages)-->
@@ -63,8 +64,27 @@
     <!--end::Entry-->
     <div class="card">
         <form class="form" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-dark"></div>
+            @*<div asp-validation-summary="ModelOnly" class="text-dark"></div>*@
             <div class="card-body">
+
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>From:</label>
+                            <input type="date" asp-for="From" class="form-control" placeholder="From"/>
+                            <span class="form-text text-muted">Starts from</span>
+                            <span asp-validation-for="From" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>To:</label>
+                            <input type="date" asp-for="To" class="form-control" placeholder="To"/>
+                            <span class="form-text text-muted">Ends to</span>
+                            <span asp-validation-for="To" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col col-sm-6">
                         <div class="form-group">
@@ -76,74 +96,31 @@
                             <span asp-validation-for="EmployeeId" class="text-danger"></span>
                         </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col col-sm-6">
+                    <div class="col col-sm-4">
                         <div class="form-group">
-                            <label>From:</label>
-                            <input type="date" asp-for="From" class="form-control" placeholder="From" />
-                            <span class="form-text text-muted">Starts from</span>
-                            <span asp-validation-for="From" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>To:</label>
-                            <input type="date" asp-for="To" class="form-control" placeholder="To" />
-                            <span class="form-text text-muted">Ends to</span>
-                            <span asp-validation-for="To" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>Number of Days:</label>
-                            <input type="number" asp-for="NoDays" class="form-control" placeholder="Days Worked" />
-                            <span class="form-text text-muted">Number of Days Worked</span>
-                            <span asp-validation-for="NoDays" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>Normal OT:</label>
-                            <input type="number" asp-for="NormalOT" class="form-control" placeholder="Normal OT" />
-                            <span class="form-text text-muted">Normal OT</span>
-                            <span asp-validation-for="NormalOT" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>Normal OT 2:</label>
-                            <input type="number" asp-for="NormalOT2" class="form-control" placeholder="Normal OT 2" />
-                            <span class="form-text text-muted">Normal OT 2</span>
-                            <span asp-validation-for="NormalOT2" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>Weekend OT:</label>
-                            <input type="number" asp-for="WeekendOT" class="form-control" placeholder="Weekend OT" />
-                            <span class="form-text text-muted">Weekend OT</span>
-                            <span asp-validation-for="WeekendOT" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-sm-6">
-                        <div class="form-group">
-                            <label>HolyDay OT:</label>
-                            <input type="number" asp-for="HolyDayOT" class="form-control" placeholder="HolyDay OT" />
-                            <span class="form-text text-muted">HolyDay OT</span>
-                            <span asp-validation-for="HolyDayOT" class="text-danger"></span>
+                            <label>Attendance Type</label>
+                            <select type="number" asp-for="AttendanceType" class="form-control" asp-items="Html.GetEnumSelectList<AttendanceType>()" required>
+                                <option>Select Attendance Type</option>
+                            </select>
+                            <span class="form-text text-muted">Attendance Type</span>
+                            <span asp-validation-for="AttendanceType" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
 
+                <div class="row"> 
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>Remark</label>
+                            <textarea type="text" asp-for="Remark" class="form-control" placeholder="Remark" rows="4"></textarea>
+                            <span asp-validation-for="Remark" class="text-danger"></span>
+                        </div>
+                    </div>
 
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
@@ -155,7 +132,7 @@
 </div>
 
 <script>
-                var KTAppSettings = {
+    var KTAppSettings = {
         "breakpoints": {
             "sm": 576,
             "md": 768,

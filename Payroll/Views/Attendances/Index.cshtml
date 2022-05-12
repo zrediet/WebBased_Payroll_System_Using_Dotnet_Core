@@ -106,14 +106,10 @@
 
         </div>
         <div class="card-body">
-            <!--begin: Search Form-->
-            <!--begin::Search Form-->
-            <!--end::Search Form-->
-            <!--end: Search Form-->
-            <!--begin: Datatable-->
             @*@await Component.InvokeAsync("AttendanceList", @ViewBag.studentId)*@
 
             <!--end: Datatable-->
+            @await Component.InvokeAsync("AttendanceList", "")
         </div>
     </div>
 </div>

@@ -25,12 +25,20 @@ namespace Payroll.Controllers
             //var applicationDbContext = _context.Attendances.Include(a => a.Employee).Where(c=>c.IsDeleted == false);
             //await applicationDbContext.ToListAsync();
 
-            var divisionList = await _context.Divisions.Where(c => c.IsDeleted == false).OrderBy(a=>a.DivisionName).ToListAsync();
-            ViewData["DivisionId"] = new SelectList(divisionList, "Id", "DivisionName");
+            var divisionList = await _context.Departments.Where(c => c.IsDeleted == false).OrderBy(a=>a.DepartmentName).ToListAsync();
+            ViewData["DepartmentId"] = new SelectList(divisionList, "Id", "DepartmentName");
 
             return View();
         }
 
+        public async Task<IActionResult> GetAttendance(DateTime from, DateTime to, string division)
+        {
+            var result = await _context.Attendances.Include(a=>a.Employee)
+                .Where(c => c.From >= from && c.To <= to && c.Employee.Department.Id == division && c.IsDeleted == false)
+                .ToListAsync();
+
+            return View("");
+        }
         // GET: Attendances/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -70,17 +78,46 @@ namespace Payroll.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmployeeId,NoDays,Id,From,To,NormalOT,NormalOT2,WeekendOT,HolyDayOT,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId")] Attendance attendance)
-        {
-            attendance.Id = Guid.NewGuid().ToString();
-            attendance.CreationTime = DateTime.Today;
-            attendance.CreatorUserId = "";
-            attendance.IsDeleted = false;
+        public async Task<IActionResult> Create([Bind("EmployeeId,NoDays,Id,From,To,NormalOT,NormalOT2,WeekendOT,HolyDayOT,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId,AttendanceType")] Attendance attendance)
+        {   
+
+            //check if the Date is in a correct order
+            if (attendance.From > attendance.To)
+            {
+                ModelState.AddModelError("","From should before To");
+            }
+
+            if (attendance.From > DateTime.Today)
+            {
+                ModelState.AddModelError("","Payment should be paid until Today. Not Starting From Today. Please Change.");
+            }
+
+            if (attendance.To > DateTime.Today)
+            {
+                ModelState.AddModelError("","Future Date Payment NOT Allowed. Please Change.");
+            }
+
+            var hiredDate = _context.Employees.Where(c => c.Id == attendance.EmployeeId).Select(a => a.HireDate);
+            
+            
 
             if (ModelState.IsValid)
             {
-                _context.Add(attendance);
-                await _context.SaveChangesAsync();
+                //Iterate and add the attendance
+                var diff = (attendance.To - attendance.From).TotalDays;
+
+                for (int i = 0; i <= diff ; i++) //attendance.NoDays
+                {
+                    attendance.Id = Guid.NewGuid().ToString();
+                    attendance.CreationTime = DateTime.Today;
+                    attendance.CreatorUserId = "";
+                    attendance.IsDeleted = false;
+                    attendance.Date = attendance.From.AddDays(i);
+
+                    _context.Add(attendance);
+                    await _context.SaveChangesAsync();
+                }
+                 
                 return RedirectToAction(nameof(Index));
             }
 

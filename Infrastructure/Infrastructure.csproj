@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Models\ClearanceRequestChild.cs" />
+    <Compile Remove="Models\Project.cs" />
+    <Compile Remove="Models\SubProject.cs" />
   </ItemGroup>
 
   <ItemGroup>

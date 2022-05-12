@@ -2,7 +2,181 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<link rel="stylesheet" href="~/css/adminlte.min.css">
+@*@model IEnumerable<Infrastructure.Models.Sale>*@
+
+@{
+    //ViewData["Title"] = "Home page";
+    int rowNumber = 0;
+}
+<!--<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div>--><!-- /.col -->
+            <!--<div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard</li>
+                </ol>
+            </div>--><!-- /.col -->
+        <!--</div>--><!-- /.row -->
+    <!--</div>--><!-- /.container-fluid -->
+<!--</div>-->
+
+<div class="row">
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-info">
+            <div class="inner">
+                <h3>@ViewBag.Totalprograms</h3>
+
+                <p>Programs</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-bag"></i>
+            </div>
+            <a class="small-box-footer"> <i class=""></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-success">
+            <div class="inner">
+                @*<h3>@ViewBag.TotalBooks<sup style="font-size: 15px"></sup></h3>*@
+                @*<p>Students: @ViewBag.AudioBook | E-Books: @ViewBag.Ebooks | Both: @ViewBag.Both</p>*@
+
+                <h3>@ViewBag.TotalStudents<sup style="font-size: 15px"></sup></h3>
+                <p>Total Students</p>
+            </div>
+            <div class="icon">
+                <i class="fa fa-book-reader"></i>
+            </div>
+            <a class="small-box-footer"><i class=""></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-warning">
+            <div class="inner">
+                @*<h3>@ViewBag.TotalSubscriber</h3>*@
+                <h3>@ViewBag.TotalInstructors</h3>
+
+                <p>Instructors</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-person-add"></i>
+            </div>
+            <a class="small-box-footer"><i class=""></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box bg-danger">
+            <div class="inner">
+                @*<h3>@ViewBag.PodCastCount</h3>*@
+                <h3>M @ViewBag.maleStudent, F @ViewBag.femaleStudent </h3>
+                <p>Gender Variation</p>
+            </div>
+            <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+            </div>
+            <a class="small-box-footer"><i class=""></i></a>
+        </div>
+    </div>
+    <!-- ./col -->
 </div>
+<!-- Main row -->
+<div class="row">
+    <!-- Left col -->
+    <section class="col-lg-6 connectedSortable">
+        <!-- Custom Table-->
+
+        <div class="card">
+            <div class="card-header border-0">
+                <h3 class="card-title">Course Offering</h3>
+            </div>
+            <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Course</th>
+                            <th>Cr. Hr</th>
+                            <th>Program</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in Model)*@
+                        @* { rowNumber++; *@
+                        <tr>
+                            <td>@rowNumber</td>
+                            <td>
+                                <img src="dist/img/default-150x150.png" alt="Product 1" class="img-circle img-size-32 mr-2">
+                                @*@Html.DisplayFor(modelItem=> item.Book.Name)*@
+                            </td>
+                            <td>@*@Html.DisplayFor(modelItem => item.Book.ResourceType)*@</td>
+                            <td>
+                                AR152
+                            </td>
+                        </tr>
+
+                        @*}*@
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card -->
+        <!--/.direct-chat -->
+
+    </section>
+    <!-- /.Left col -->
+    <!-- right col (We are only adding the ID to make the widgets sortable)-->
+    <section class="col-lg-6 connectedSortable">
+        <!-- Map card -->
+        <div class="card">
+            <div class="card-header border-0">
+                <div class="d-flex justify-content-between">
+                    <h3 class="card-title">Visitors</h3>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex">
+                    <p class="d-flex flex-column">
+                        <span class="text-bold text-lg">820</span>
+                        <span>Visitors Over Time</span>
+                    </p>
+                    <p class="ml-auto d-flex flex-column text-right">
+                        <span class="text-success">
+                            <i class="fas fa-arrow-up"></i> 12.5%
+                        </span>
+                        <span class="text-muted">Since last week</span>
+                    </p>
+                </div>
+                <!-- /.d-flex -->
+
+                <div class="position-relative mb-4">
+                    <canvas id="visitors-chart" height="200"></canvas>
+                </div>
+
+                <div class="d-flex flex-row justify-content-end">
+                    <span class="mr-2">
+                        <i class="fas fa-square text-primary"></i> This Week
+                    </span>
+
+                    <span>
+                        <i class="fas fa-square text-gray"></i> Last Week
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- /.card -->
+    </section>
+    <!-- right col -->
+</div>
+
+ 

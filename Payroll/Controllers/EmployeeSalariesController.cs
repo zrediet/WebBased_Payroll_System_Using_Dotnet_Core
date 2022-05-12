@@ -165,7 +165,7 @@ namespace Payroll.Controllers
                     employeeSalary.LastModificationTime = DateTime.Today;
                     employeeSalary.LastModifierUserId = "";
                     employeeSalary.SalaryStatus = SalaryStatus.InActive;
-                    
+                    employeeSalary.IsDeleted = true;
 
                     _context.Update(employeeSalary);
                     await _context.SaveChangesAsync();

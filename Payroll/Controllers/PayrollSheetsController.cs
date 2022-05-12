@@ -70,6 +70,7 @@ namespace Payroll.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EmployeeId,PayStart,PayEnd,BasicSalary,Allowance,OverTime,GrossSalary,IncomeTax,PensionEmployee,PensionCompany,Loan,Penality,OtherDeduction,NetPay,NonTaxableAllowance,Id,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId,PaymentRound")] PayrollSheet payrollSheet)
         {
+             
             CalculatePayment(Convert.ToDateTime(payrollSheet.PayStart), Convert.ToDateTime(payrollSheet.PayEnd), payrollSheet.PaymentRound);
 
             payrollSheet.Id = Guid.NewGuid().ToString();
@@ -294,7 +295,7 @@ namespace Payroll.Controllers
                 WorkingDays = Convert.ToInt32(WorkingDaysLst[0].Value);
                 //divide the working days by 2 if the Round is Round 1
                 //else leave as is
-                if (round == PaymentRound.First)
+                if (round == PaymentRound.First || round == PaymentRound.Second)
                 {
                     WorkingDays = WorkingDays / 2;
                 }
@@ -400,28 +401,27 @@ namespace Payroll.Controllers
                     //IF the Employee is Contract based (Daily laborer)
                     if (item.EmploymentType == EmploymentType.Contract)
                     {
+                        //Get Attendance List
                         var attlist = (from x in _context.Attendances
-                                       where x.EmployeeId.Equals(item.Id) && x.From >= startDate && x.To <= endDate && x.IsDeleted == false
-                                       select x).ToList();
-
-
+                                       where x.EmployeeId.Equals(item.Id) && x.Date >= startDate && x.Date <= endDate && x.IsDeleted == false
+                                       select x).ToList(); 
                         decimal dailysalary = Convert.ToDecimal(item.Salary / WorkingDays);
                         if (attlist.Count > 0)
                         {
                             foreach (var listemp in attlist)
                             {
-                                //if ((listemp.From >= startDate) || (listemp.To <= endDate))
-                                //    NoDaysPresent += TotalDays;
-
-                                if (listemp.NoDays > 0 && listemp.IsDeleted == false)
+                                if (listemp.AttendanceType == AttendanceType.Available ||
+                                    listemp.AttendanceType == AttendanceType.On_Leave ||
+                                    listemp.AttendanceType == AttendanceType.Holiday ||
+                                    listemp.AttendanceType == AttendanceType.Day_Off ||
+                                    listemp.AttendanceType == AttendanceType.Reason)
                                 {
-                                    NoDaysPresent = listemp.NoDays;
-                                }
-                                //else
-                                //    BasicSalaryfield += Convert.ToDecimal(listemp.TotalHours);
+                                    NoDaysPresent += 1;
+                                    //NoDaysPresent += TotalDays;
+                                } 
                             }
                             //Basic Salary is Number of days on duty * daily Salary
-                            if (round == PaymentRound.First)
+                            if (round == PaymentRound.First || round == PaymentRound.Second)
                             {
                                 BasicSalary = (NoDaysPresent * dailysalary)/2;
                             }
@@ -432,10 +432,44 @@ namespace Payroll.Controllers
                             
                         }
                     }
+                    else if (item.EmploymentType == EmploymentType.Permanent)
+                    {
+                        var attlist = (from x in _context.Attendances
+                            where x.EmployeeId.Equals(item.Id) && x.Date >= startDate && x.Date <= endDate && x.IsDeleted == false
+                            select x).ToList(); 
+
+                        decimal dailysalary = Convert.ToDecimal(item.Salary / WorkingDays);
+                        if (attlist.Count > 0)
+                        {
+                            foreach (var listemp in attlist)
+                            {
+                                if (listemp.AttendanceType == AttendanceType.Available ||
+                                    listemp.AttendanceType == AttendanceType.On_Leave ||
+                                    listemp.AttendanceType == AttendanceType.Holiday ||
+                                    listemp.AttendanceType == AttendanceType.Day_Off ||
+                                    listemp.AttendanceType == AttendanceType.Reason)
+                                {
+                                    NoDaysPresent += 1;
+                                    //NoDaysPresent += TotalDays;
+                                } 
+                            }
+                            //Basic Salary is Number of days on duty * daily Salary
+                            //Round payment is not applicable for 
+                            BasicSalary = NoDaysPresent * dailysalary;
+                            //if (round == PaymentRound.First)
+                            //{
+                            //    BasicSalary = (NoDaysPresent * dailysalary)/2;
+                            //}
+                            //else
+                            //{
+                            //    BasicSalary = NoDaysPresent * dailysalary;
+                            //}
+                            
+                        }
+                    }
                     else
                     {
                         //If the Employee is terminated with in the date range
-
                         var terlist = (from x in _context.Terminations
                                        where x.EmployeeId.Equals(item.EmployeeId)
                                        select x).ToList();
@@ -462,14 +496,19 @@ namespace Payroll.Controllers
                     }
 
 
-                    var qot = _context.Attendances.Where(P => P.EmployeeId.Equals(item.Id) && P.From >= startDate && P.To <= endDate).ToList();
-                    foreach (var otlst in qot)
+                    // Below code can be for both Contractual and Permanent
+                    // Employees Except Pension! 
+                    // Pension can only be calculated if the employee is permanent and 
+                    // IsPension is True.
+                    var qot = _context.Overtimes.Where(P => P.EmployeeId.Equals(item.Id) && P.Date >= startDate && P.Date <= endDate).ToList();
+                    foreach (var otlst in qot) //otlst stands for OT List
                     {
                         ot125 += otlst.NormalOT != 0 ? otlst.NormalOT : 0;
                         ot150 += otlst.NormalOT2 != 0 ? otlst.NormalOT2 : 0;
                         ot200 += otlst.WeekendOT != 0 ? otlst.WeekendOT : 0;
                         ot250 += otlst.HolyDayOT != 0 ? otlst.HolyDayOT : 0;
                     }
+
                     OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot125) * ot125V);
                     OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot150) * ot150V);
                     OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot200) * ot200V);
@@ -490,7 +529,11 @@ namespace Payroll.Controllers
                     var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
                     var OtherAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.OtherAllowance).Sum());
 
-                    Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
+                    if (BasicSalary != 0)
+                    {
+                        Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
+                    }
+                    
 
                     //AllowanceNontax = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Allowance && p.NonTax).Select(P => P.Amount).Sum();
                     //otherdeduction = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Deduction).Select(P => P.Amount).Sum();
@@ -553,8 +596,13 @@ namespace Payroll.Controllers
 
                     payrolls.CreationTime = DateTime.Now;
                     payrolls.CreatorUserId = "";//User.Identity.GetUserId();
-                    _context.PayrollSheets.Add(payrolls);
-                    _context.SaveChanges();
+
+                    if (BasicSalary != 0)
+                    {
+                        _context.PayrollSheets.Add(payrolls);
+                        _context.SaveChanges();
+                    }
+                    
                 }
             }
             else

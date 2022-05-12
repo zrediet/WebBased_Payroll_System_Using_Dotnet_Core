@@ -29,4 +29,5 @@ namespace Infrastructure.Models
         [Display(Name = "Weekend OT")] WeekendOT, 
         [Display(Name = "HolyDay OT")] HolidayOT, 
     }
+
 }

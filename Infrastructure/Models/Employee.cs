@@ -36,14 +36,14 @@ namespace Infrastructure.Models
 
         [Display(Name = "Payment Period")]public PaymentPeriod PaymentPeriod { get; set; }
 
-        public virtual Division Division { get; set; }
-        public string DivisionId { get; set; }
+        public virtual Department Department { get; set; }
+        public string DepartmentId { get; set; }
 
-        public virtual Project Project { get; set; }
-        public string ProjectId { get; set; }
+        //public virtual Project Project { get; set; }
+        //public string ProjectId { get; set; }
 
-        public virtual SubProject SubProject { get; set; }
-        public string SubProjectId { get; set; }
+        //public virtual SubProject SubProject { get; set; }
+        //public string SubProjectId { get; set; }
 
         [Display(Name = "Is Pension?")]
         public bool IsPension { get; set; }
@@ -65,7 +65,8 @@ namespace Infrastructure.Models
         [Display(Name = "Hire Date")]
         [DataType(DataType.Date)]
         public DateTime HireDate { get; set; }
-        
+
+         
     }
 
     public enum EmployeeStatus

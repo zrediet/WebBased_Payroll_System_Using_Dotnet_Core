@@ -19,7 +19,7 @@ namespace Payroll.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Infrastructure.Models.Attendance", b =>
+            modelBuilder.Entity("Infrastructure.Models.AllowancePackage", b =>
                 {
                     b.Property<string>("Id")
                         .HasMaxLength(36)
@@ -37,14 +37,49 @@ namespace Payroll.Migrations
                     b.Property<DateTime?>("DeletionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EmployeeId")
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
-                    b.Property<DateTime>("From")
+                    b.Property<DateTime?>("LastModificationTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HolyDayOT")
-                        .HasColumnType("int");
+                    b.Property<string>("LastModifierUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PackageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PackageVersion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AllowancePackages");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.AllowancePackageChild", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<string>("AllowanceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AllowancePackageId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeleterUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -55,20 +90,63 @@ namespace Payroll.Migrations
                     b.Property<string>("LastModifierUserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NoDays")
+                    b.Property<float>("Value")
+                        .HasColumnType("real");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AllowancePackageId");
+
+                    b.ToTable("AllowancePackageChildren");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.Attendance", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<int>("AttendanceType")
                         .HasColumnType("int");
 
-                    b.Property<int>("NormalOT")
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeleterUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime>("From")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifierUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Reason")
                         .HasColumnType("int");
 
-                    b.Property<int>("NormalOT2")
-                        .HasColumnType("int");
+                    b.Property<string>("Remark")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("To")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("WeekendOT")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -545,6 +623,58 @@ namespace Payroll.Migrations
                     b.ToTable("Logs");
                 });
 
+            modelBuilder.Entity("Infrastructure.Models.Overtime", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<DateTime?>("CreationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatorUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeleterUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeletionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("EmployeeId")
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<int>("HolyDayOT")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("LastModificationTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifierUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NormalOT")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NormalOT2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeekendOT")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
+
+                    b.ToTable("Overtimes");
+                });
+
             modelBuilder.Entity("Infrastructure.Models.PayrollSetting", b =>
                 {
                     b.Property<string>("Id")
@@ -1017,6 +1147,15 @@ namespace Payroll.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Infrastructure.Models.AllowancePackageChild", b =>
+                {
+                    b.HasOne("Infrastructure.Models.AllowancePackage", "AllowancePackage")
+                        .WithMany()
+                        .HasForeignKey("AllowancePackageId");
+
+                    b.Navigation("AllowancePackage");
+                });
+
             modelBuilder.Entity("Infrastructure.Models.Attendance", b =>
                 {
                     b.HasOne("Infrastructure.Models.Employee", "Employee")
@@ -1075,6 +1214,15 @@ namespace Payroll.Migrations
                 });
 
             modelBuilder.Entity("Infrastructure.Models.EmployeeSalary", b =>
+                {
+                    b.HasOne("Infrastructure.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Infrastructure.Models.Overtime", b =>
                 {
                     b.HasOne("Infrastructure.Models.Employee", "Employee")
                         .WithMany()
