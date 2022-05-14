@@ -43,7 +43,7 @@ namespace Payroll.Controllers
         {
 
             int totalEmployee = _context.Employees.Count(c=>c.IsDeleted == false);
-            int divisions = _context.Departments.Count(c => c.IsDeleted == false);
+            int divisions = 0;//_context.Departments.Count(c => c.IsDeleted == false);
 
 
             ViewBag.TotalEmployee = totalEmployee;

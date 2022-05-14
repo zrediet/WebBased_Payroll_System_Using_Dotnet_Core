@@ -15,6 +15,8 @@ namespace Infrastructure.Models
         public float Value { get; set; }
         public virtual AllowancePackage AllowancePackage { get; set; }
         public string AllowancePackageId { get; set; }
-         
+        [Display(Name = "Is Taxable?")]
+        public bool Taxable { get; set; }
+        
     }
 }

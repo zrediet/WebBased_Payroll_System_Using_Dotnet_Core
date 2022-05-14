@@ -515,9 +515,9 @@ namespace Payroll.Controllers
                     OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot250) * ot250V);
 
                     //var qpen = db.Penalties.Where(P => P.EmployeeId.Equals(item.Id) && P.PenaltyDate > startdate && P.PenaltyDate < enddate).ToList();
-                    var ForFamily = _context.EmployeeFamilies.Where(P => P.EmployeeId.Equals(item.EmployeeId) && P.IsDeleted == false).ToList();
+                    //var ForFamily = _context.EmployeeFamilies.Where(P => P.EmployeeId.Equals(item.EmployeeId) && P.IsDeleted == false).ToList();
 
-                    Family = Convert.ToDecimal(ForFamily.Select(P => P.Amount).Sum());
+                    //Family = Convert.ToDecimal(ForFamily.Select(P => P.Amount).Sum());
 
                     var Allowancesal = (from x in _context.EmployeeSalaries
                                         where x.IsDeleted == false && x.EmployeeId == item.Id
@@ -525,13 +525,15 @@ namespace Payroll.Controllers
                     //presentallowance = (decimal)Allowancesal.PresentAllowance - penality;
 
                     //Allowance = (decimal)Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum();
-                    var TransportAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum());
-                    var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
-                    var OtherAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.OtherAllowance).Sum());
+                    
+                    //var TransportAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum());
+                    //var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
+                    //var OtherAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.OtherAllowance).Sum());
 
                     if (BasicSalary != 0)
                     {
-                        Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
+                        //Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
+                        Allowance = Convert.ToDecimal(0 + 0 + 0);
                     }
                     
 

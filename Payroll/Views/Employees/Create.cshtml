@@ -257,45 +257,7 @@
 
                         </div>
                         <div class="separator separator-dashed my-10"></div>
-                        <div class="my-52">
-                            <h3 class=" text-dark font-weight-bold mb-10">Placement:</h3>
-                            <div class="form-group row">
-                                <label class="col-3">Division</label>
-                                <div class="col-9">
-                                    <div class="input-group input-group-solid">
-                                        @*<input type="text" class="form-control form-control-solid" placeholder="Username" value="loop"/>*@
-                                        <select type="text" class="form-control form-control-solid" asp-for="Employee.DivisionId" asp-items="ViewBag.DivisionId" id="division">
-                                            <option>Select Division</option>
-                                        </select>
-                                        <span asp-validation-for="Employee.DivisionId" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-3">Project</label>
-                                <div class="col-9">
-                                    <div class="input-group input-group-solid">
-                                        @*<input type="text" class="form-control form-control-solid" placeholder="Username" value="loop"/>*@
-                                        <select type="text" class="form-control form-control-solid" asp-for="Employee.ProjectId" asp-items="ViewBag.ProjectId" id="Project">
-                                            <option>Select Project</option>
-                                        </select>
-                                        <span asp-validation-for="Employee.ProjectId" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-3">Sub-Project</label>
-                                <div class="col-9">
-                                    <div class="input-group input-group-solid">
-                                        @*<input type="text" class="form-control form-control-solid" placeholder="Username" value="loop"/>*@
-                                        <select type="text" class="form-control form-control-solid" asp-for="Employee.SubProjectId" asp-items="ViewBag.SubProjectId" id="subProject">
-                                            <option>Select Sub-Project</option>
-                                        </select>
-                                        <span asp-validation-for="Employee.SubProjectId" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="separator separator-dashed my-10"></div>
                         <div class="my-52">
                             <h3 class=" text-dark font-weight-bold mb-10">Salary Info.:</h3>
@@ -312,8 +274,8 @@
                                 <label class="col-3">Transport Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" asp-for="EmployeeSalary.TransportAllowance" class="form-control form-control-solid" placeholder="0.00"  required="true"/>
-                                        <span asp-validation-for="EmployeeSalary.TransportAllowance" class="text-danger"></span>
+                                        <input type="number"   class="form-control form-control-solid" placeholder="0.00"  required="true"/>
+                                        <span   class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -321,8 +283,8 @@
                                 <label class="col-3">Home Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" asp-for="EmployeeSalary.HomeAllowance" class="form-control form-control-solid" placeholder="0.00" required="true"/>
-                                        <span asp-validation-for="EmployeeSalary.HomeAllowance" class="text-danger"></span>
+                                        <input type="number"  class="form-control form-control-solid" placeholder="0.00" required="true"/>
+                                        <span  class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -330,8 +292,8 @@
                                 <label class="col-3">Other Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" asp-for="EmployeeSalary.OtherAllowance" class="form-control form-control-solid" placeholder="0.00" required="true"/>
-                                        <span asp-validation-for="EmployeeSalary.OtherAllowance" class="text-danger"></span>
+                                        <input type="number"  class="form-control form-control-solid" placeholder="0.00" required="true"/>
+                                        <span  class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
