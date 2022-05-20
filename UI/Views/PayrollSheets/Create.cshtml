@@ -1,0 +1,153 @@
+﻿@using Infrastructure.Models
+@model Infrastructure.Models.PayrollSheet
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+ 
+
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-2">
+
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
+                    Create
+                </h5>
+                <!--end::Page Title-->
+                <!--begin::Actions-->
+                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+
+                <span class="text-muted font-weight-bold mr-4">Payroll</span>
+
+                    
+                <!--end::Actions-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center">
+                <!--begin::Actions-->
+                <a href="#" class=" btn-sm font-weight-bold font-size-base mr-1">
+                    @DateTime.Today.ToLongDateString()
+                </a>
+                <!--end::Actions-->
+
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--end::Entry-->
+    <div class="card">
+        <form class="form" asp-action="Create">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>Start From:</label>
+                            <input type="date" asp-for="PayStart" class="form-control" placeholder="Start From" />
+                            <span asp-validation-for="PayStart" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>To :</label>
+                            <input type="date" asp-for="PayEnd" class="form-control" placeholder="To" />
+                            <span asp-validation-for="PayEnd" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>Round :</label>
+                            <select type="text" class="form-control form-control-solid" asp-for="PaymentRound" asp-items="Html.GetEnumSelectList<PaymentRound>()" id="round" required>
+                                <option>Select Round</option>
+                            </select>
+                            <span asp-validation-for="PaymentRound" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div> 
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Calculate</button>
+                <button asp-action="Index" asp-controller="PayrollSheets"  class="btn btn-secondary">Back To List</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+<script>
+            var KTAppSettings = {
+    "breakpoints": {
+        "sm": 576,
+        "md": 768,
+        "lg": 992,
+        "xl": 1200,
+        "xxl": 1400
+    },
+    "colors": {
+        "theme": {
+            "base": {
+                "white": "#ffffff",
+                "primary": "#3699FF",
+                "secondary": "#E5EAEE",
+                "success": "#1BC5BD",
+                "info": "#8950FC",
+                "warning": "#FFA800",
+                "danger": "#F64E60",
+                "light": "#E4E6EF",
+                "dark": "#181C32"
+            },
+            "light": {
+                "white": "#ffffff",
+                "primary": "#E1F0FF",
+                "secondary": "#EBEDF3",
+                "success": "#C9F7F5",
+                "info": "#EEE5FF",
+                "warning": "#FFF4DE",
+                "danger": "#FFE2E5",
+                "light": "#F3F6F9",
+                "dark": "#D6D6E0"
+            },
+            "inverse": {
+                "white": "#ffffff",
+                "primary": "#ffffff",
+                "secondary": "#3F4254",
+                "success": "#ffffff",
+                "info": "#ffffff",
+                "warning": "#ffffff",
+                "danger": "#ffffff",
+                "light": "#464E5F",
+                "dark": "#ffffff"
+            }
+        },
+        "gray": {
+            "gray-100": "#F3F6F9",
+            "gray-200": "#EBEDF3",
+            "gray-300": "#E4E6EF",
+            "gray-400": "#D1D3E0",
+            "gray-500": "#B5B5C3",
+            "gray-600": "#7E8299",
+            "gray-700": "#5E6278",
+            "gray-800": "#3F4254",
+            "gray-900": "#181C32"
+        }
+    },
+    "font-family": "Poppins"
+};
+</script>
+<!--end::Global Config-->
+<!--begin::Global Theme Bundle(used by all pages)-->
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="~/assets/js/scripts.bundle.js"></script>
+<!--end::Global Theme Bundle-->
+

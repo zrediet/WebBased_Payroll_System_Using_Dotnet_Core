@@ -1,6 +1,6 @@
 ﻿using Infrastructure.Models;
 
-namespace Payroll.Models
+namespace UI.Models
 {
     public class EmployeeRegistrationViewModel
     {

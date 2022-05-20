@@ -18,12 +18,10 @@ namespace Infrastructure.Models
         [Required]
         public float BasicSalary { get; set; }
 
-        public virtual AllowancePackageDetail AllowancePackageDetail { get; set; }
-        public string AllowancePackageDetailId { get; set; }
-
-        //public float TransportAllowance { get; set; }
-        //public float HomeAllowance { get; set; }
-        //public float OtherAllowance { get; set; }
+        
+        public float TransportAllowance { get; set; }
+        public float HomeAllowance { get; set; }
+        public float OtherAllowance { get; set; }
 
 
         public SalaryStatus SalaryStatus { get; set; }

@@ -22,13 +22,14 @@ namespace UI.Controllers
         // GET: Attendances
         public async Task<IActionResult> Index()
         {
-            //var applicationDbContext = _context.Attendances.Include(a => a.Employee).Where(c=>c.IsDeleted == false);
-            //await applicationDbContext.ToListAsync();
+            var result = _context.Attendances
+                .Include(a => a.Employee).Where(c => c.IsDeleted == false);
+            await result.ToListAsync();
 
-            var divisionList = await _context.Departments.Where(c => c.IsDeleted == false).OrderBy(a=>a.DepartmentName).ToListAsync();
-            ViewData["DepartmentId"] = new SelectList(divisionList, "Id", "DepartmentName");
+            //var divisionList = await _context.Departments.Where(c => c.IsDeleted == false).OrderBy(a=>a.DepartmentName).ToListAsync();
+            //ViewData["DepartmentId"] = new SelectList(divisionList, "Id", "DepartmentName");
 
-            return View();
+            return View(result);
         }
 
         public async Task<IActionResult> GetAttendance(DateTime from, DateTime to, string division)

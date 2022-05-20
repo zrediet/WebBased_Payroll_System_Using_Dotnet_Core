@@ -1,0 +1,268 @@
+﻿@model Infrastructure.Models.Overtime
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_MetronicLayout.cshtml";
+}
+
+@*<h1>Create</h1>
+
+    <h4>Overtime</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label"></label>
+                    <select asp-for="EmployeeId" class ="form-control" asp-items="ViewBag.EmployeeId"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NormalOT" class="control-label"></label>
+                    <input asp-for="NormalOT" class="form-control" />
+                    <span asp-validation-for="NormalOT" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NormalOT2" class="control-label"></label>
+                    <input asp-for="NormalOT2" class="form-control" />
+                    <span asp-validation-for="NormalOT2" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="WeekendOT" class="control-label"></label>
+                    <input asp-for="WeekendOT" class="form-control" />
+                    <span asp-validation-for="WeekendOT" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HolyDayOT" class="control-label"></label>
+                    <input asp-for="HolyDayOT" class="form-control" />
+                    <span asp-validation-for="HolyDayOT" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Id" class="control-label"></label>
+                    <input asp-for="Id" class="form-control" />
+                    <span asp-validation-for="Id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreationTime" class="control-label"></label>
+                    <input asp-for="CreationTime" class="form-control" />
+                    <span asp-validation-for="CreationTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CreatorUserId" class="control-label"></label>
+                    <input asp-for="CreatorUserId" class="form-control" />
+                    <span asp-validation-for="CreatorUserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModificationTime" class="control-label"></label>
+                    <input asp-for="LastModificationTime" class="form-control" />
+                    <span asp-validation-for="LastModificationTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastModifierUserId" class="control-label"></label>
+                    <input asp-for="LastModifierUserId" class="form-control" />
+                    <span asp-validation-for="LastModifierUserId" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeletionTime" class="control-label"></label>
+                    <input asp-for="DeletionTime" class="form-control" />
+                    <span asp-validation-for="DeletionTime" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DeleterUserId" class="control-label"></label>
+                    <input asp-for="DeleterUserId" class="form-control" />
+                    <span asp-validation-for="DeleterUserId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+<div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Subheader-->
+    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
+        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+            <!--begin::Info-->
+            <div class="d-flex align-items-center flex-wrap mr-2">
+
+                <!--begin::Page Title-->
+                <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">
+                    Create
+                </h5>
+                <!--end::Page Title-->
+                <!--begin::Actions-->
+                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
+
+                <span class="text-muted font-weight-bold mr-4">OT</span>
+                 
+                <!--end::Actions-->
+            </div>
+            <!--end::Info-->
+            <!--begin::Toolbar-->
+            <div class="d-flex align-items-center">
+                <!--begin::Actions-->
+                <a href="#" class=" btn-sm font-weight-bold font-size-base mr-1">
+                    @DateTime.Today.ToLongDateString()
+                </a>
+                <!--end::Actions-->
+
+            </div>
+            <!--end::Toolbar-->
+        </div>
+    </div>
+    <!--end::Subheader-->
+    <!--end::Entry-->
+    <div class="card">
+        <form class="form" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-dark"></div>
+            <div class="card-body">
+                 
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>Employee ID:</label>
+                            <select type="text" class="form-control" asp-for="EmployeeId" asp-items="ViewBag.EmployeeId" id="EmployeeID" required>
+                                <option>Select Employee ID</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>Date :</label>
+                            <input type="date" asp-for="Date" class="form-control" placeholder="Date" />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>Normal OT:</label>
+                            <input type="number" asp-for="NormalOT" class="form-control" placeholder="Normal OT" />
+                            <span asp-validation-for="NormalOT" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>Normal OT 2:</label>
+                            <input type="number" asp-for="NormalOT2" class="form-control" placeholder="Normal OT 2" />
+                            <span asp-validation-for="NormalOT2" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>Weekend OT:</label>
+                            <input type="number" asp-for="WeekendOT" class="form-control" placeholder="Weekend OT" />
+                            <span asp-validation-for="WeekendOT" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="col col-sm-4">
+                        <div class="form-group">
+                            <label>Holiday OT:</label>
+                            <input type="number" asp-for="HolyDayOT" class="form-control" placeholder="Holiday OT" />
+                            <span asp-validation-for="HolyDayOT" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button asp-action="Index" asp-controller="Overtimes" class="btn btn-secondary">Back To List</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+            var KTAppSettings = {
+    "breakpoints": {
+        "sm": 576,
+        "md": 768,
+        "lg": 992,
+        "xl": 1200,
+        "xxl": 1400
+    },
+    "colors": {
+        "theme": {
+            "base": {
+                "white": "#ffffff",
+                "primary": "#3699FF",
+                "secondary": "#E5EAEE",
+                "success": "#1BC5BD",
+                "info": "#8950FC",
+                "warning": "#FFA800",
+                "danger": "#F64E60",
+                "light": "#E4E6EF",
+                "dark": "#181C32"
+            },
+            "light": {
+                "white": "#ffffff",
+                "primary": "#E1F0FF",
+                "secondary": "#EBEDF3",
+                "success": "#C9F7F5",
+                "info": "#EEE5FF",
+                "warning": "#FFF4DE",
+                "danger": "#FFE2E5",
+                "light": "#F3F6F9",
+                "dark": "#D6D6E0"
+            },
+            "inverse": {
+                "white": "#ffffff",
+                "primary": "#ffffff",
+                "secondary": "#3F4254",
+                "success": "#ffffff",
+                "info": "#ffffff",
+                "warning": "#ffffff",
+                "danger": "#ffffff",
+                "light": "#464E5F",
+                "dark": "#ffffff"
+            }
+        },
+        "gray": {
+            "gray-100": "#F3F6F9",
+            "gray-200": "#EBEDF3",
+            "gray-300": "#E4E6EF",
+            "gray-400": "#D1D3E0",
+            "gray-500": "#B5B5C3",
+            "gray-600": "#7E8299",
+            "gray-700": "#5E6278",
+            "gray-800": "#3F4254",
+            "gray-900": "#181C32"
+        }
+    },
+    "font-family": "Poppins"
+};
+</script>
+<!--end::Global Config-->
+<!--begin::Global Theme Bundle(used by all pages)-->
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="~/assets/js/scripts.bundle.js"></script>
+<!--end::Global Theme Bundle-->

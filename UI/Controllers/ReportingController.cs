@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using DevExpress.AspNetCore.Reporting.WebDocumentViewer;
 using DevExpress.AspNetCore.Reporting.WebDocumentViewer.Native.Services;
 
-namespace Payroll.Controllers
+namespace UI.Controllers
 {
     public class CustomWebDocumentViewerController : WebDocumentViewerController
     {

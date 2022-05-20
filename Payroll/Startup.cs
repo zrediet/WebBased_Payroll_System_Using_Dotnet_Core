@@ -145,7 +145,6 @@ namespace Payroll
             });
 
             app.UseEndpoints(endpoints =>
-
             {
 
                 endpoints.MapRazorPages();

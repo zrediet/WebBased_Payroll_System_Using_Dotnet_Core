@@ -1,0 +1,94 @@
+﻿@model IEnumerable<Infrastructure.Models.Company>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "_StarAdminLayout";
+    int rowNumber = 0;
+}
+ 
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Company Information</h4>
+            <p class="card-description">
+                @if (ViewBag.CompanyCount == 0)
+                {
+                    <a asp-action="Create" asp-controller="Companies" class="btn btn-primary btn-rounded btn-icon"> Company Info. </a>
+                }
+            </p>
+
+            <div class="table-responsive pt-3">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Company Name
+                            </th>
+                            <th>
+                                Phone #
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Website
+                            </th>
+                            <th>
+                                Fax
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                            <th>
+                                Creation Date
+                            </th>
+                            <th>
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        rowNumber++;
+                        <tr>
+                            <td>
+                                rowNumber;
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CompanyPhone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Website)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fax)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Location)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreationTime)
+                            </td>
+                            <td>
+                                <a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="item.Id" title="Edit"></a>
+                                <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="item.Id" title="Delete"></a>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

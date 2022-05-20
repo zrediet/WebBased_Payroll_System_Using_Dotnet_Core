@@ -1,0 +1,234 @@
+﻿@using Infrastructure.Models
+@*@model Infrastructure.Models.Employee*@
+@model UI.Models.EmployeeRegistrationViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_StarAdminLayout";
+}
+
+ 
+
+<div class="content" d-flex flex-column flex-column-fluid id="kt_content">
+    
+
+    <div class="card card-custom card-sticky" id="kt_page_sticky_card">
+        <div class="card-header">
+            <div class="card-title">
+                <h3 class="card-label">
+                    Employee Registration <i class="mr-2"></i>
+                </h3>
+            </div>
+            @*<div class="card-toolbar">
+                <a class="btn btn-light-primary font-weight-bolder mr-2" asp-action="Index">
+                    <i class="ki ki-long-arrow-back icon-sm"></i>
+                    Back
+                </a>
+            </div>*@
+        </div>
+        <div class="card-body">
+            <!--begin::Form-->
+            <form class="form" id="kt_form" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-dark"></div>
+                <div class="row">
+                    @Html.Hidden("Employee.EmployeeId", (object)ViewBag.EmpId)
+                    <div class="col-xl-2"></div>
+                    <div class="col-xl-8">
+                        <div class="my-5">
+                            <h3 class=" text-dark font-weight-bold mb-10">Employee Info:</h3>
+                            <div class="form-group row">
+                                <label class="col-3">Employee ID</label>
+                                <div class="col-9">
+                                    <input class="form-control form-control-solid" type="text" value=@ViewBag.EmpId readonly />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">First Name</label>
+                                <div class="col-9">
+                                    @*<input class="form-control form-control-solid" type="text" value="Nick"/>*@
+                                    <input type="text" asp-for="Employee.FirstName" class="form-control form-control-solid" placeholder="First Name" />
+                                    <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Middle Name</label>
+                                <div class="col-9">
+                                    <input type="text" asp-for="Employee.MiddleName" class="form-control form-control-solid" placeholder="Middle Name" />
+                                    <span asp-validation-for="Employee.MiddleName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Last Name</label>
+                                <div class="col-9">
+                                    <input type="text" asp-for="Employee.LastName" class="form-control form-control-solid" placeholder="Last Name" />
+                                    <span asp-validation-for="Employee.LastName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Gender</label>
+                                <div class="col-9">
+                                    @*<input class="form-control form-control-solid" type="text" value="Loop Inc."/>*@
+                                    <select type="text" class="form-control form-control-solid" asp-for="Employee.Gender" asp-items="Html.GetEnumSelectList<Gender>()" id="gender" required>
+                                        <option>-- Select Gender --</option>
+                                    </select>
+                                    <span asp-validation-for="Employee.Gender" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Contact Phone</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="text" asp-for="Employee.PhoneNo" class="form-control form-control-solid" placeholder="+251" />
+                                        <span asp-validation-for="Employee.PhoneNo" class="text-danger"></span>
+                                    </div>
+                                    <span class="form-text text-muted">We'll never share your no with anyone else.</span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">City/Town</label>
+                                <div class="col-9">
+                                    <input type="text" asp-for="Employee.City" class="form-control form-control-solid" type="text" placeholder="City" />
+                                    <span asp-validation-for="Employee.City" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Sub-City</label>
+                                <div class="col-9">
+                                    <input type="text" asp-for="Employee.SubCity" class="form-control form-control-solid" type="text" placeholder="Sub-City"/>
+                                    <span asp-validation-for="Employee.SubCity" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-3">Region</label>
+                                <div class="col-9">
+                                    <input type="text" asp-for="Employee.Region" class="form-control form-control-solid" placeholder="Region"/>
+                                    <span asp-validation-for="Employee.Region" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="separator separator-dashed my-10"></div>
+                        <div class="my-5">
+                            <h3 class=" text-dark font-weight-bold mb-10">Employment Details:</h3>
+
+                            <div class="form-group row">
+                                <label class="col-3">Hire Date</label>
+                                <div class="col-9">
+                                    <input type="date" asp-for="Employee.HireDate" class="form-control form-control-solid" />
+                                    <span asp-validation-for="Employee.HireDate" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-3">Employment Type</label>
+                                <div class="col-9">
+                                    <select type="text" class="form-control form-control-solid" asp-for="Employee.EmploymentType" asp-items="Html.GetEnumSelectList<EmploymentType>()" id="EmploymentType" required>
+                                        <option>-- Select Employment Type --</option>
+                                    </select>
+                                    <span asp-validation-for="Employee.EmploymentType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Payment Period</label>
+                                <div class="col-9">
+                                    <select type="text" class="form-control form-control-solid" asp-for="Employee.PaymentPeriod" asp-items="Html.GetEnumSelectList<PaymentPeriod>()" id="paymentPeriod" required>
+                                        <option> -- Select Payment Period --</option>
+                                    </select>
+                                    <span asp-validation-for="Employee.PaymentPeriod" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="separator separator-dashed my-10"></div>
+                        <div class="separator separator-dashed my-10"></div>
+                        <div class="my-52">
+                            <h3 class=" text-dark font-weight-bold mb-10">Salary Info.:</h3>
+                            <div class="form-group row">
+                                <label class="col-3">Basic Salary</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="text" asp-for="EmployeeSalary.BasicSalary" class="form-control form-control-solid" placeholder="Basic Salary" required="true" />
+                                        <span asp-validation-for="EmployeeSalary.BasicSalary" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Transport Allowance</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Home Allowance</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Other Allowance</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
+                                        <span class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Is Pension-->
+                            <div class="form-group row">
+                                <label class="col-3 col-form-label">Is Pension</label>
+                                <div class="col-9 col-form-label">
+                                    <div class="checkbox-inline">
+                                        <label class="checkbox checkbox-success">
+                                            <input type="checkbox" name="Checkboxes5" />
+                                            <span></span>
+                                            Is Pension?
+                                        </label>
+                                    </div>
+                                    <span class="form-text text-muted">Please select if the employee is required to pay pension</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="separator separator-dashed my-10"></div>
+                        <div class="my-52">
+                            <h3 class=" text-dark font-weight-bold mb-10">Account Info.:</h3>
+                            <div class="form-group row">
+                                <label class="col-3">Bank Account #</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="text" asp-for="Employee.BankAccount" class="form-control form-control-solid" placeholder="Account Number" required="true" />
+                                        <span asp-validation-for="Employee.BankAccount" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-10">
+                                <label class="col-3"></label>
+                                <div class="col-9">
+                                    <button type="submit" class="btn btn-primary font-weight-bold btn-sm">Register Employee</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-2"></div>
+                    </div>
+                </div>
+            </form>
+            <!--end::Form-->
+        </div>
+    </div>
+
+</div>
+
+
+@*<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="~/assets/js/scripts.bundle.js"></script>*@

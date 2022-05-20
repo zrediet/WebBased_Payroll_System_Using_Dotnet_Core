@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Models;
-using Payroll.Data;
+using UI.Data;
 
-namespace Payroll.Controllers
+namespace UI.Controllers
 {
     public class OvertimesController : Controller
     {

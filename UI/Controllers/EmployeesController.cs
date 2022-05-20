@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Models;
-using Payroll.Data;
-using Payroll.Models;
+using UI.Data;
+using UI.Models;
 
-namespace Payroll.Controllers
+namespace UI.Controllers
 {
     public class EmployeesController : Controller
     {

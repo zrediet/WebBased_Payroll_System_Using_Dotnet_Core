@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Web.Controllers
+namespace UI.Controllers
 {
     public class ReportsController : Controller
     {
