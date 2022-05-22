@@ -137,7 +137,7 @@
     <!--end::Entry-->
     <div class="card">
         <form class="form" asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-dark"></div>
+
             <div class="card-body">
                 <div class="form-group">
                     <label>Company Name:</label>
@@ -183,7 +183,6 @@
                             <input type="tel" asp-for="Fax" class="form-control" placeholder="Enter Fax" />
                             <span class="form-text text-muted">Please enter fax</span>
                             <span asp-validation-for="Fax" class="text-danger"></span>
-
                         </div>
                     </div>
 
@@ -195,17 +194,14 @@
                             <input type="tel" asp-for="Location" class="form-control" placeholder="Enter Location" />
                             <span class="form-text text-muted">Please enter location</span>
                             <span asp-validation-for="Location" class="text-danger"></span>
-
                         </div>
                     </div>
-
                 </div>
-
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="card-footer">
                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                <button asp-action="Index" asp-controller="Companies"  class="btn btn-secondary">Back To List</button>
+                <button asp-action="Index" asp-controller="Companies" class="btn btn-secondary">Back To List</button>
             </div>
         </form>
     </div>
