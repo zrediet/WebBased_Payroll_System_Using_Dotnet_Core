@@ -64,10 +64,15 @@
                                     @Html.DisplayFor(modelItem => item.CreationTime)
                                 </td>
                                 <td>
-                                    <a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="item.Id" title="Edit"></a>
+                                    @*<a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="item.Id" title="Edit"></a>
                                     <a class="btn flaticon-price-tag text-success" asp-controller="EmployeeSalaries" asp-action="Index" title="Change Salary"></a>
                                     <a class="btn flaticon-list-1 text-info" asp-action="Details" asp-route-id="item.Id" title="Detail"></a>
-                                    <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="item.Id" title="Delete"></a>
+                                    <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="item.Id" title="Delete"></a>*@
+
+                                    <a class="btn btn-warning btn-sm" type="button" title="Edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn btn-success btn-sm" type="button" title="Change Salary" asp-controller="EmployeeSalaries" asp-action="Index">Change Salary</a>
+                                    <a class="btn btn-info btn-sm" type="button" title="Detail" asp-action="Details" asp-route-id="@item.Id">Detail</a>
+                                    <a class="btn btn-danger btn-sm" type="button" title="Delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                 </td>
                             </tr>
 

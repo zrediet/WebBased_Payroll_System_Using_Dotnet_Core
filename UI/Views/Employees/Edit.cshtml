@@ -4,183 +4,10 @@
 
 @{
     ViewData["Title"] = "Edit";
+    Layout = "_StarAdminLayout";
 }
 
-@*<h1>Edit</h1>
-
-<h4>Employee</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="EmployeeId" class="control-label"></label>
-                <input asp-for="EmployeeId" class="form-control" />
-                <span asp-validation-for="EmployeeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MiddleName" class="control-label"></label>
-                <input asp-for="MiddleName" class="form-control" />
-                <span asp-validation-for="MiddleName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
-                <select asp-for="Gender" class="form-control"></select>
-                <span asp-validation-for="Gender" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNo" class="control-label"></label>
-                <input asp-for="PhoneNo" class="form-control" />
-                <span asp-validation-for="PhoneNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmployeeStatus" class="control-label"></label>
-                <select asp-for="EmployeeStatus" class="form-control"></select>
-                <span asp-validation-for="EmployeeStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmploymentType" class="control-label"></label>
-                <select asp-for="EmploymentType" class="form-control"></select>
-                <span asp-validation-for="EmploymentType" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="CreationTime" class="control-label"></label>
-                <input asp-for="CreationTime" class="form-control" />
-                <span asp-validation-for="CreationTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatorUserId" class="control-label"></label>
-                <input asp-for="CreatorUserId" class="form-control" />
-                <span asp-validation-for="CreatorUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModificationTime" class="control-label"></label>
-                <input asp-for="LastModificationTime" class="form-control" />
-                <span asp-validation-for="LastModificationTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastModifierUserId" class="control-label"></label>
-                <input asp-for="LastModifierUserId" class="form-control" />
-                <span asp-validation-for="LastModifierUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeletionTime" class="control-label"></label>
-                <input asp-for="DeletionTime" class="form-control" />
-                <span asp-validation-for="DeletionTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DeleterUserId" class="control-label"></label>
-                <input asp-for="DeleterUserId" class="form-control" />
-                <span asp-validation-for="DeleterUserId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
- *@
- 
- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />        <!--end::Fonts-->
-<!--begin::Global Theme Styles(used by all pages)-->
-<link href="~/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
-
-<link href="~/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
-<!--end::Global Theme Styles-->
-<!--begin::Layout Themes(used by all pages)-->
-
-<link href="~/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/themes/layout/brand/dark.css" rel="stylesheet" type="text/css" />
-<link href="~/assets/css/themes/layout/aside/dark.css" rel="stylesheet" type="text/css" />        <!--end::Layout Themes-->
-
-<link rel="shortcut icon" href="~/assets/media/logos/favicon.ico" />
-
- 
-<script>
-    var KTAppSettings = {
-        "breakpoints": {
-            "sm": 576,
-            "md": 768,
-            "lg": 992,
-            "xl": 1200,
-            "xxl": 1400
-        },
-        "colors": {
-            "theme": {
-                "base": {
-                    "white": "#ffffff",
-                    "primary": "#3699FF",
-                    "secondary": "#E5EAEE",
-                    "success": "#1BC5BD",
-                    "info": "#8950FC",
-                    "warning": "#FFA800",
-                    "danger": "#F64E60",
-                    "light": "#E4E6EF",
-                    "dark": "#181C32"
-                },
-                "light": {
-                    "white": "#ffffff",
-                    "primary": "#E1F0FF",
-                    "secondary": "#EBEDF3",
-                    "success": "#C9F7F5",
-                    "info": "#EEE5FF",
-                    "warning": "#FFF4DE",
-                    "danger": "#FFE2E5",
-                    "light": "#F3F6F9",
-                    "dark": "#D6D6E0"
-                },
-                "inverse": {
-                    "white": "#ffffff",
-                    "primary": "#ffffff",
-                    "secondary": "#3F4254",
-                    "success": "#ffffff",
-                    "info": "#ffffff",
-                    "warning": "#ffffff",
-                    "danger": "#ffffff",
-                    "light": "#464E5F",
-                    "dark": "#ffffff"
-                }
-            },
-            "gray": {
-                "gray-100": "#F3F6F9",
-                "gray-200": "#EBEDF3",
-                "gray-300": "#E4E6EF",
-                "gray-400": "#D1D3E0",
-                "gray-500": "#B5B5C3",
-                "gray-600": "#7E8299",
-                "gray-700": "#5E6278",
-                "gray-800": "#3F4254",
-                "gray-900": "#181C32"
-            }
-        },
-        "font-family": "Poppins"
-    };
-</script>
-
+   
 <div class="content" d-flex flex-column flex-column-fluid id="kt_content">
     <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
         <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
@@ -196,23 +23,10 @@
                 <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
 
                 <span class="text-muted font-weight-bold mr-4">Employee Record</span>
-
-                @*<a href="#" class="btn btn-light-warning font-weight-bolder btn-sm">
-                    Add New
-                    </a>*@
-                <!--end::Actions-->
+ 
             </div>
             <!--end::Info-->
-            <!--begin::Toolbar-->
-            <div class="d-flex align-items-center">
-                <!--begin::Actions-->
-                <a href="#" class=" btn-sm font-weight-bold font-size-base mr-1">
-                    @DateTime.Today.ToLongDateString()
-                </a>
-                <!--end::Actions-->
-
-            </div>
-            <!--end::Toolbar-->
+        
         </div>
     </div>
 
@@ -236,8 +50,7 @@
             <form class="form" id="kt_form" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-dark"></div>
                 <div class="row">
-                    @*@Html.Hidden("Employee.EmployeeId",(object)ViewBag.EmpId)*@
-                    <input type="hidden" asp-for="Employee.Id" />
+                <input type="hidden" asp-for="Employee.Id" />
                     <div class="col-xl-2"></div>
                     <div class="col-xl-8">
                         <div class="my-5">
@@ -251,7 +64,6 @@
                             <div class="form-group row">
                                 <label class="col-3">First Name</label>
                                 <div class="col-9">
-                                    @*<input class="form-control form-control-solid" type="text" value="Nick"/>*@
                                     <input type="text" asp-for="Employee.FirstName" class="form-control form-control-solid" placeholder="First Name" />
                                     <span asp-validation-for="Employee.FirstName" class="text-danger"></span>
                                 </div>
@@ -266,7 +78,6 @@
                             <div class="form-group row">
                                 <label class="col-3">Last Name</label>
                                 <div class="col-9">
-                                    @*<input class="form-control form-control-solid" type="text" value="Watson"/>*@
                                     <input type="text" asp-for="Employee.LastName" class="form-control form-control-solid" placeholder="Last Name" />
                                     <span asp-validation-for="Employee.LastName" class="text-danger"></span>
                                 </div>
@@ -274,7 +85,6 @@
                             <div class="form-group row">
                                 <label class="col-3">Gender</label>
                                 <div class="col-9">
-                                    @*<input class="form-control form-control-solid" type="text" value="Loop Inc."/>*@
                                     <select type="text" class="form-control form-control-solid" asp-for="Employee.Gender" asp-items="Html.GetEnumSelectList<Gender>()" id="gender" required>
                                         <option>Select Gender</option>
                                     </select>
@@ -286,7 +96,6 @@
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                                        @*<input type="tel" asp-for="Employee.PhoneNo" class="form-control form-control-solid" placeholder="Enter Phone #" />*@
                                         <input type="text" asp-for="Employee.PhoneNo" class="form-control form-control-solid" placeholder="+251" />
                                         <span asp-validation-for="Employee.PhoneNo" class="text-danger"></span>
                                     </div>
@@ -341,7 +150,6 @@
                             <div class="form-group row">
                                 <label class="col-3">Payment Period</label>
                                 <div class="col-9">
-                                    @*<input class="form-control form-control-solid" type="text" value="Loop Inc."/>*@
                                     <select type="text" class="form-control form-control-solid" asp-for="Employee.PaymentPeriod" asp-items="Html.GetEnumSelectList<PaymentPeriod>()" id="paymentPeriod" required>
                                         <option>Select Payment Period</option>
                                     </select>
@@ -494,9 +302,4 @@
 
 </div>
 
-<!--end::Global Config-->
-<!--begin::Global Theme Bundle(used by all pages)-->
-<script src="~/assets/plugins/global/plugins.bundle.js"></script>
-<script src="~/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-<script src="~/assets/js/scripts.bundle.js"></script>
-<!--end::Global Theme Bundle-->
+ 

@@ -95,7 +95,7 @@ namespace Infrastructure.Models
 
     public enum PaymentPeriod
     {
-        [Display(Name = "Every 15 Days")] EveryFifteenDays,
+        //[Display(Name = "Every 15 Days")] EveryFifteenDays,
         [Display(Name = "Monthly")] Monthly
     }
 }
