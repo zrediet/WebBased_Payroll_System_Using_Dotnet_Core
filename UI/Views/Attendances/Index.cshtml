@@ -17,7 +17,7 @@
             </p>
 
             <div class="table-responsive pt-3">
-                <table class="table table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>
@@ -33,6 +33,9 @@
                                 Creation Date
                             </th>
                             <th>
+                                Date
+                            </th>
+                            <th>
                                 Actions
                             </th>
                         </tr>
@@ -41,24 +44,27 @@
                         @foreach (var item in Model)
                         {
                             rowNumber++;
-                            <tr>
-                                <td>
-                                    rowNumber;
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AttendanceType)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreationTime)
-                                </td>
-                                <td>
-                                    <a class="btn flaticon-edit text-warning" asp-action="Edit" asp-route-id="item.Id" title="Edit"></a>
-                                    <a class="btn flaticon-delete text-danger" asp-action="Delete" asp-route-id="item.Id" title="Delete"></a>
-                                </td>
-                            </tr> 
+                        <tr>
+                            <td>
+                                @rowNumber
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AttendanceType)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CreationTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" type="button" asp-action="Edit" asp-route-id="item.Id" title="Edit">Edit</a>
+                                <a class="btn btn-danger btn-sm" type="button" asp-action="Delete" asp-route-id="item.Id" title="Delete">Delete</a>
+                            </td>
+                        </tr> 
                         }
                     </tbody>
                 </table>

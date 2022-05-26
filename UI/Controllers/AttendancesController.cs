@@ -29,7 +29,7 @@ namespace UI.Controllers
             //var divisionList = await _context.Departments.Where(c => c.IsDeleted == false).OrderBy(a=>a.DepartmentName).ToListAsync();
             //ViewData["DepartmentId"] = new SelectList(divisionList, "Id", "DepartmentName");
 
-            return View(result);
+            return View(result.OrderBy(a=>a.Employee.FirstName).ThenBy(b=>b.Date));
         }
 
         public async Task<IActionResult> GetAttendance(DateTime from, DateTime to, string division)
@@ -85,7 +85,7 @@ namespace UI.Controllers
             //check if the Date is in a correct order
             if (attendance.From > attendance.To)
             {
-                ModelState.AddModelError("","From should before To");
+                ModelState.AddModelError("","From Date should come before To");
             }
 
             if (attendance.From > DateTime.Today)
@@ -95,7 +95,24 @@ namespace UI.Controllers
 
             if (attendance.To > DateTime.Today)
             {
-                ModelState.AddModelError("","Future Date Payment NOT Allowed. Please Change.");
+                var month = DateTime.Today.Month;
+                var year = DateTime.Today.Year;
+
+                if (attendance.To.Year == year)
+                {
+                    if (attendance.To.Month != month)
+                    {
+                        ModelState.AddModelError("","Future Date Payment NOT Allowed. Please Change.");
+                    }
+                }
+
+                if (attendance.To.Year != year)
+                {
+                    ModelState.AddModelError("","Year not Same. Please change");
+                     
+                }
+                
+                 
             }
 
             var hiredDate = _context.Employees.Where(c => c.Id == attendance.EmployeeId).Select(a => a.HireDate);
