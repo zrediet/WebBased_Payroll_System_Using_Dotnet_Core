@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Infrastructure.Models.Employee>
-@*@model IEnumerable<Payroll.Models.EmployeeRegistrationViewModel>*@
 
 @{
     ViewData["Title"] = "Index";
@@ -12,7 +11,7 @@
         <div class="card-body">
             <h4 class="card-title">Employee List</h4>
             <p class="card-description">
-                <a asp-action="Create" asp-controller="Employees" class="btn btn-primary btn-rounded btn-icon"> New Employee </a>
+                <a asp-action="Create" asp-controller="Employees" class="btn btn-primary btn-sm"> New Employee </a>
             </p>
             
             <div class="table-responsive pt-3">
@@ -70,9 +69,6 @@
                                     <a class="btn btn-danger btn-sm" type="button" title="Delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                 </td>
                             </tr>
-
-
-
                         }
                     </tbody>
                 </table>

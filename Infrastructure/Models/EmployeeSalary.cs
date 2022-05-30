@@ -10,9 +10,9 @@ namespace Infrastructure.Models
     public class EmployeeSalary : FullAuditEntity
     {
         
-        public string EmployeeId { get; set; }
+        
         public virtual Employee Employee { get; set; }
-
+        public string EmployeeId { get; set; }
 
 
         [Required]

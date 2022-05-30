@@ -22,7 +22,7 @@ namespace UI.Controllers
         // GET: IncomeTaxSettings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.IncomeTaxSetting.ToListAsync());
+            return View(await _context.IncomeTaxSetting.OrderBy(a=>a.StartingAmount).ToListAsync());
         }
 
         // GET: IncomeTaxSettings/Details/5

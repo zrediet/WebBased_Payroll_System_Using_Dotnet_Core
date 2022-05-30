@@ -21,8 +21,8 @@ namespace Infrastructure.Models
         [Display(Name = "To")]
         public DateTime PayEnd { get; set; }
 
-        [Display(Name = "Round")]
-        public PaymentRound PaymentRound { get; set; }
+        //[Display(Name = "Round")]
+        //public PaymentRound PaymentRound { get; set; }
 
         [Display(Name="No.Days")]
         public int NoDays { get; set; }
@@ -53,12 +53,7 @@ namespace Infrastructure.Models
 
         public PayrollStatus PayrollStatus { get; set; }
     }
-
-    public enum PaymentRound
-    {
-        [Display(Name = "First")] First,
-        [Display(Name = "Second")] Second
-    }
+     
 
     public enum PayrollStatus
     {

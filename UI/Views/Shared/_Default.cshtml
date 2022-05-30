@@ -1,0 +1,36 @@
+﻿@model System.Linq.IQueryable<Infrastructure.Models.Attendance>
+
+@if (Model.Any())
+{
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card card-secondary">
+                <div class="card-header">
+                    <h3 class="card-title">List of Courses Offerings</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            Select Courses
+                            @foreach (var item in Model)
+                            {
+                                <div class="form-group clearfix">
+                                    <div class="icheck-success d-inline">
+                                        <input type="checkbox" name="r3" id="commonradioSuccess2">
+                                        <label for="commonradioSuccess2">
+                                            @*@Html.DisplayFor(modelItem => item.Course.CourseCode) @Html.DisplayFor(modelItem => item.Course.CourseTitle)*@
+                                        </label>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p class="text-danger">Check prerequisite </p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

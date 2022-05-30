@@ -115,8 +115,10 @@ namespace UI.Controllers
             }
 
             //var employee = await _context.Employees.FindAsync(id);
-            var employee = await _context.Employees.Include(d => d.Department)
+            var employee = await _context.Employees
+                .Include(d => d.Department)
                 .FirstOrDefaultAsync(m=>m.Id==id);
+             
 
             if (employee == null)
             {

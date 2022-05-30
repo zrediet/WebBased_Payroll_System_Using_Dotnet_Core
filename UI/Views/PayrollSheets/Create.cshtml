@@ -63,7 +63,7 @@
                             <span asp-validation-for="PayEnd" class="text-danger"></span>
                         </div>
                     </div>
-                    <div class="col col-sm-4">
+                    @*<div class="col col-sm-4">
                         <div class="form-group">
                             <label>Round :</label>
                             <select type="text" class="form-control form-control-solid" asp-for="PaymentRound" asp-items="Html.GetEnumSelectList<PaymentRound>()" id="round" required>
@@ -71,7 +71,7 @@
                             </select>
                             <span asp-validation-for="PaymentRound" class="text-danger"></span>
                         </div>
-                    </div>
+                    </div>*@
 
                 </div> 
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>

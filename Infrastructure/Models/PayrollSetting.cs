@@ -28,7 +28,9 @@ namespace Infrastructure.Models
         [Display(Name = "Normal OT 2")] NormalOT2,
         [Display(Name = "Weekend OT")] WeekendOT, 
         [Display(Name = "HolyDay OT")] HolidayOT,
-        [Display(Name = "Payment Date")] PaymentDate
+        [Display(Name = "Payment Date")] PaymentDate,
+        [Display(Name = "Max Non-Taxable Allowance Amount")] MaxNonTaxableAllowanceAmount
+
     }
 
 }

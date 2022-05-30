@@ -71,7 +71,7 @@ namespace UI.Controllers
         public async Task<IActionResult> Create([Bind("EmployeeId,PayStart,PayEnd,BasicSalary,Allowance,OverTime,GrossSalary,IncomeTax,PensionEmployee,PensionCompany,Loan,Penality,OtherDeduction,NetPay,NonTaxableAllowance,Id,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId,PaymentRound")] PayrollSheet payrollSheet)
         {
              
-            CalculatePayment(Convert.ToDateTime(payrollSheet.PayStart), Convert.ToDateTime(payrollSheet.PayEnd), payrollSheet.PaymentRound);
+            CalculatePayment(Convert.ToDateTime(payrollSheet.PayStart), Convert.ToDateTime(payrollSheet.PayEnd));
 
             payrollSheet.Id = Guid.NewGuid().ToString();
             payrollSheet.CreationTime = DateTime.Today;
@@ -174,7 +174,7 @@ namespace UI.Controllers
             return _context.PayrollSheets.Any(e => e.Id == id);
         }
 
-        protected void CalculatePayment(DateTime startDate, DateTime endDate, PaymentRound round)
+        protected void CalculatePayment(DateTime startDate, DateTime endDate)
         {
             //db = new AgContext();
 
@@ -295,11 +295,10 @@ namespace UI.Controllers
                 WorkingDays = Convert.ToInt32(WorkingDaysLst[0].Value);
                 //divide the working days by 2 if the Round is Round 1
                 //else leave as is
-                if (round == PaymentRound.First || round == PaymentRound.Second)
-                {
-                    WorkingDays = WorkingDays / 2;
-                }
-
+                //if (round == PaymentRound.First || round == PaymentRound.Second)
+                //{
+                //    WorkingDays = WorkingDays / 2;
+                //}
             }
             else
             {
@@ -330,7 +329,7 @@ namespace UI.Controllers
             }
             else
             {
-                ViewBag.Message = "No Ot setting found";
+                ViewBag.Message = "No OT setting found";
             }
 
             //Normal OT 2
@@ -343,7 +342,7 @@ namespace UI.Controllers
             }
             else
             {
-                ViewBag.Message = "No Ot setting found";
+                ViewBag.Message = "No OT setting found";
             }
 
             //Weekend OT List
@@ -356,7 +355,7 @@ namespace UI.Controllers
             }
             else
             {
-                ViewBag.Message = "No Ot setting found";
+                ViewBag.Message = "No OT setting found";
             }
             var holidayotlist = (from hOTl in _context.PayrollSettings
                                  where hOTl.GeneralPSett == GeneralPSett.HolidayOT && hOTl.IsDeleted == false
@@ -367,7 +366,7 @@ namespace UI.Controllers
             }
             else
             {
-                ViewBag.Message = "No Ot setting found";
+                ViewBag.Message = "No OT setting found";
             }
 
             //Search of Employee that are Active OR Hired recently
@@ -421,14 +420,17 @@ namespace UI.Controllers
                                 } 
                             }
                             //Basic Salary is Number of days on duty * daily Salary
-                            if (round == PaymentRound.First || round == PaymentRound.Second)
-                            {
-                                BasicSalary = (NoDaysPresent * dailysalary)/2;
-                            }
-                            else
-                            {
-                                BasicSalary = NoDaysPresent * dailysalary;
-                            }
+
+                            BasicSalary = NoDaysPresent * dailysalary;
+
+                            //if (round == PaymentRound.First || round == PaymentRound.Second)
+                            //{
+                            //    BasicSalary = (NoDaysPresent * dailysalary)/2;
+                            //}
+                            //else
+                            //{
+                            //    BasicSalary = NoDaysPresent * dailysalary;
+                            //}
                             
                         }
                     }
@@ -509,10 +511,10 @@ namespace UI.Controllers
                         ot250 += otlst.HolyDayOT != 0 ? otlst.HolyDayOT : 0;
                     }
 
-                    OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot125) * ot125V);
-                    OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot150) * ot150V);
-                    OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot200) * ot200V);
-                    OverTime += (decimal)(((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot250) * ot250V);
+                    OverTime += ((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot125) * ot125V;
+                    OverTime += ((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot150) * ot150V;
+                    OverTime += ((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot200) * ot200V;
+                    OverTime += ((((decimal)item.Salary / WorkingDays) / Workinghrs) * ot250) * ot250V;
 
                     //var qpen = db.Penalties.Where(P => P.EmployeeId.Equals(item.Id) && P.PenaltyDate > startdate && P.PenaltyDate < enddate).ToList();
                     //var ForFamily = _context.EmployeeFamilies.Where(P => P.EmployeeId.Equals(item.EmployeeId) && P.IsDeleted == false).ToList();
@@ -526,16 +528,20 @@ namespace UI.Controllers
 
                     //Allowance = (decimal)Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum();
                     
-                    //var TransportAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum());
-                    //var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
-                    //var OtherAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.OtherAllowance).Sum());
+                    var TransportAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum());
+                    var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
+                    var OtherAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.OtherAllowance).Sum());
 
                     if (BasicSalary != 0)
                     {
-                        //Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
-                        Allowance = Convert.ToDecimal(0 + 0 + 0);
+                        Allowance = Convert.ToDecimal(TransportAllowance + HomeAllowance + OtherAllowance);
+                        //Allowance = Convert.ToDecimal(0 + 0 + 0);
                     }
-                    
+
+                    //var NonTaxableAll = _context.PayrollSettings
+                      //  .Where(a => a.GeneralPSett == GeneralPSett.MaxNonTaxableAllowanceAmount).Select(a => a.Value).ToList();
+
+                    //decimal FinalAllowanceAfterDeduction = Allowance - (decimal)NonTaxableAll[0];
 
                     //AllowanceNontax = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Allowance && p.NonTax).Select(P => P.Amount).Sum();
                     //otherdeduction = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Deduction).Select(P => P.Amount).Sum();
@@ -548,6 +554,7 @@ namespace UI.Controllers
                         PenCompany = (decimal)(BasicSalary * (CompanyPension / (decimal)100.00));
                         PenEmployee = (decimal)(BasicSalary * (EmployeePension / (decimal)100.00));
                     }
+                    
                     //if (item.IsProvident)
                     //{
                     //    pfemp = (decimal)(basicsalary * (pfemp / (decimal)100.00));
@@ -592,7 +599,7 @@ namespace UI.Controllers
                     //payrolls.Pf = (float)pfemp;
                     //payrolls.NonTaxableallowance = (float)AllowanceNontax;
                     
-                    payrolls.PaymentRound = round;
+                    //payrolls.PaymentRound = round;
                     payrolls.NoDays = WorkingDays;
 
 
@@ -609,7 +616,7 @@ namespace UI.Controllers
             }
             else
             {
-                ModelState.AddModelError("","No Attendance list found");
+                ModelState.AddModelError("","No Employee list found");
             }
 
 

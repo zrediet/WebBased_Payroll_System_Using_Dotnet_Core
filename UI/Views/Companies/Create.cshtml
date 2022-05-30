@@ -4,38 +4,25 @@
     ViewData["Title"] = "Create";
     Layout = "_StarAdminLayout";
 }
-
  
-  
 
 <div class="col-md-12 grid-margin stretch-card">
-    <!--begin::Subheader-->
-    <div class="subheader py-2 py-lg-4  subheader-solid " id="kt_subheader">
-        <div class=" container-fluid  d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
-            <!--begin::Info-->
-            <div class="d-flex align-items-center flex-wrap mr-2">
-
-                <!--begin::Actions-->
-                <div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-4 bg-gray-200"></div>
-
-                <span class="text-muted font-weight-bold mr-4">New Company Information</span>
-            </div>
-         
-        </div>
-    </div>
-    <!--end::Subheader-->
-    <!--end::Entry-->
+   
     <div class="card">
         <form class="form" asp-action="Create">
-            
             <div class="card-body">
-                <div class="form-group">
-                    <label>Company Name:</label>
-                    <input type="text" asp-for="CompanyName" class="form-control" placeholder="Company Name" />
-                    <span class="form-text text-muted">Please enter company name</span>
-                    <span asp-validation-for="CompanyName" class="text-danger"></span>
-
+                <div class="card-description">
+                    <span class="text-dark font-weight-bold mr-4">New Company Information</span>
                 </div>
+                <div class="row col-sm-8">
+                    <div class="form-group">
+                        <label>Company Name:</label>
+                        <input type="text" asp-for="CompanyName" class="form-control" placeholder="Company Name" />
+                        <span class="form-text text-muted">Please enter company name</span>
+                        <span asp-validation-for="CompanyName" class="text-danger"></span>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="col col-sm-4">
                         <div class="form-group">
@@ -84,6 +71,16 @@
                             <input type="tel" asp-for="Location" class="form-control" placeholder="Enter Location" />
                             <span class="form-text text-muted">Please enter location</span>
                             <span asp-validation-for="Location" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-6">
+                        <div class="form-group">
+                            <label>Description:</label>
+                            <input type="text" asp-for="CompanyDescription" class="form-control" placeholder="Description" rows="4"/>
+                            <span class="form-text text-muted">Please enter description</span>
+                            <span asp-validation-for="CompanyDescription" class="text-danger"></span>
                         </div>
                     </div>
                 </div>

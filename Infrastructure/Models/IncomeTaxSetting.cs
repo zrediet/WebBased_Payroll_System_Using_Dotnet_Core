@@ -12,11 +12,11 @@ namespace Infrastructure.Models
         [Required]
         [Range(0.00, 999999999, ErrorMessage = "Value must be greater than OR equal to zero")]
       
-        public float StartingAmount { get; set; }
+        [Display(Name = "Starting Amount")] public float StartingAmount { get; set; }
         [Required]
         [Range(0.00, 999999999, ErrorMessage = "Value must be greater than OR equal to zero")]
        
-        public float EndingAmount { get; set; }
+        [Display(Name = "Ending Amount")] public float EndingAmount { get; set; }
         [Required]
         [Range(0.00, 999999999, ErrorMessage = "Value must be greater than OR equal to zero")]
       

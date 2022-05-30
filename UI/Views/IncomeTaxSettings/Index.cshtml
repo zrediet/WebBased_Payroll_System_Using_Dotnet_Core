@@ -11,7 +11,7 @@
         <div class="card-body">
             <h4 class="card-label">Income Tax Settings</h4>
             <p class="card-description">
-                <a asp-action="Create" asp-controller="IncomeTaxSettings" class="btn btn-primary font-weight-bolder">New Setting</a>
+                <a asp-action="Create" asp-controller="IncomeTaxSettings" class="btn btn-primary btn-sm">New Setting</a>
             </p>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -52,7 +52,7 @@
                                     @Html.DisplayFor(modelItem => item.CreationTime)
                                 </td>
                                 <td>
-                                    <a class="btn btn-warning btn-sm" type="button" title="Edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    @*<a class="btn btn-warning btn-sm" type="button" title="Edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>*@
                                     <a class="btn btn-info btn-sm" type="button" title="Detail" asp-action="Details" asp-route-id="@item.Id">Detail</a>
                                     <a class="btn btn-danger btn-sm" type="button" title="Delete" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                                 </td>
@@ -63,8 +63,7 @@
                     </tbody>
                 </table>
             </div>
-
-            <!--end: Datatable-->
+            
         </div>
     </div>
 </div>

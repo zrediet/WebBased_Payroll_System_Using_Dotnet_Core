@@ -2,9 +2,9 @@
 
 @{
     ViewData["Title"] = "Details";
+    Layout = "_StarAdminLayout";
 }
-
-<h1>Details</h1>
+ 
 
 <div>
     <h4>Employee</h4>
@@ -101,42 +101,7 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.CreationTime)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatorUserId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CreatorUserId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastModificationTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastModificationTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.LastModifierUserId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.LastModifierUserId)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IsDeleted)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IsDeleted)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeletionTime)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeletionTime)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeleterUserId)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeleterUserId)
-        </dd>
+         
     </dl>
 </div>
 <div>

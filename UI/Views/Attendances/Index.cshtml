@@ -7,68 +7,49 @@
     int rowNumber = 0;
 }
 
- 
 <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
-        <div class="card-body">
-            <h4 class="card-title">Attendances List</h4>
-            <p class="card-description">
-                <a asp-action="Create" asp-controller="Attendances" class="btn btn-primary btn-rounded btn-icon"> New Attendance </a>
-            </p>
-
-            <div class="table-responsive pt-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>
-                                #
-                            </th>
-                            <th>
-                                Full Name
-                            </th>
-                            <th>
-                                Attendance Type
-                            </th>
-                            <th>
-                                Creation Date
-                            </th>
-                            <th>
-                                Date
-                            </th>
-                            <th>
-                                Actions
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            rowNumber++;
-                        <tr>
-                            <td>
-                                @rowNumber
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Employee.FirstName) @Html.DisplayFor(modelItem => item.Employee.MiddleName) @Html.DisplayFor(modelItem => item.Employee.LastName)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.AttendanceType)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CreationTime)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Date)
-                            </td>
-                            <td>
-                                <a class="btn btn-warning btn-sm" type="button" asp-action="Edit" asp-route-id="item.Id" title="Edit">Edit</a>
-                                <a class="btn btn-danger btn-sm" type="button" asp-action="Delete" asp-route-id="item.Id" title="Delete">Delete</a>
-                            </td>
-                        </tr> 
-                        }
-                    </tbody>
-                </table>
-            </div>
+        <div class="card-header">
+            <h4 class="card-title">Filter Attendances</h4>
         </div>
+        <div class="card-description">
+        </div>
+        <div class="card-body">
+            <div class="row col col-sm-12">
+                <div class="row col col-sm-2">
+                    <div class="form-group">
+                        <select type="text" class="form-control" asp-items="ViewBag.MonthId" id="MonthId" required>
+                            <option>-- Select Month --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row col col-sm-2">
+                    <div class="form-group">
+                        <select type="text" class="form-control" asp-items="ViewBag.YearId" id="YearId" required>
+                            <option>-- Select Year --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row col col-sm-3">
+                    <div class="form-group">
+                        <select type="text" class="form-control" asp-items="ViewBag.EmployeeId" id="EmployeeId" required>
+                            <option>-- Select Employee --</option>
+                            <option value="0" selected>All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row col col-sm-2">
+                    <div class="form-group">
+                        <button class="btn btn-success" type="button"> Search</button>
+                    </div>
+                </div>
+                <div class="row col col-sm-2">
+                    <div class="form-group">
+                        <a asp-action="Create" asp-controller="Attendances" type="button" class="btn btn-primary"> New Attendance </a>
+                    </div>
+                </div>
+            </div>
+        </div> 
     </div>
 </div>
+

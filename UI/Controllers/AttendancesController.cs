@@ -23,13 +23,52 @@ namespace UI.Controllers
         public async Task<IActionResult> Index()
         {
             var result = _context.Attendances
-                .Include(a => a.Employee).Where(c => c.IsDeleted == false);
+                .Distinct()
+                .Include(a => a.Employee)
+                .Where(c => c.IsDeleted == false)
+                .OrderBy(c=>c.Employee.FirstName);
             await result.ToListAsync();
+
+            var singleEmployee = result.GroupBy(c => c.Id).Select(c => c.First());
 
             //var divisionList = await _context.Departments.Where(c => c.IsDeleted == false).OrderBy(a=>a.DepartmentName).ToListAsync();
             //ViewData["DepartmentId"] = new SelectList(divisionList, "Id", "DepartmentName");
 
-            return View(result.OrderBy(a=>a.Employee.FirstName).ThenBy(b=>b.Date));
+            var monthList = _context.Attendances
+                .Distinct()
+                .Where(c => c.IsDeleted == false)
+                .OrderBy(c=>c.Date)
+                .Select(s=> new 
+                {
+                    Id= s.Date.Month,
+                    month= s.Date.Month,
+                    year= s.Date.Year
+                }).ToList();
+
+            var distinctMonth = monthList.GroupBy(c => c.month).Select(c => c.First());
+            var distinctYear = monthList.GroupBy(c => c.year).Select(c => c.First());
+
+            ViewData["MonthId"] = new SelectList(distinctMonth, "Id", "month");
+            ViewData["YearId"] = new SelectList(distinctYear, "Id", "year");
+
+            var allEmployee = _context.Attendances
+                .Include(e => e.Employee)
+                .Distinct()
+                .Where(m => m.IsDeleted == false)
+                .OrderBy(a => a.Employee.FirstName)
+                .Select(s => new
+                {
+                    Id= s.Employee.Id,
+                    FullName= s.Employee.FirstName+" "+ s.Employee.MiddleName + " "+s.Employee.LastName+" ("+s.Employee.EmployeeId+")"
+                }).ToList();
+
+            var distinctEmployee = allEmployee.GroupBy(c => c.FullName)
+                .Select(c => c.First());
+
+            ViewData["EmployeeId"] = new SelectList(distinctEmployee, "Id", "FullName");
+
+            //return View(result.OrderBy(a=>a.Employee.FirstName).ThenBy(b=>b.Date));
+            return View(singleEmployee);
         }
 
         public async Task<IActionResult> GetAttendance(DateTime from, DateTime to, string division)

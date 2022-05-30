@@ -514,8 +514,8 @@ namespace UI.Data.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<int>("HolyDayOT")
-                        .HasColumnType("int");
+                    b.Property<decimal>("HolyDayOT")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -526,14 +526,14 @@ namespace UI.Data.Migrations
                     b.Property<string>("LastModifierUserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("NormalOT")
-                        .HasColumnType("int");
+                    b.Property<decimal>("NormalOT")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("NormalOT2")
-                        .HasColumnType("int");
+                    b.Property<decimal>("NormalOT2")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("WeekendOT")
-                        .HasColumnType("int");
+                    b.Property<decimal>("WeekendOT")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -645,9 +645,6 @@ namespace UI.Data.Migrations
 
                     b.Property<DateTime>("PayStart")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("PaymentRound")
-                        .HasColumnType("int");
 
                     b.Property<int>("PayrollStatus")
                         .HasColumnType("int");

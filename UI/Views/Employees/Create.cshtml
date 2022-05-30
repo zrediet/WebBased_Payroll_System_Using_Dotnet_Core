@@ -19,12 +19,7 @@
                     Employee Registration <i class="mr-2"></i>
                 </h3>
             </div>
-            @*<div class="card-toolbar">
-                <a class="btn btn-light-primary font-weight-bolder mr-2" asp-action="Index">
-                    <i class="ki ki-long-arrow-back icon-sm"></i>
-                    Back
-                </a>
-            </div>*@
+           
         </div>
         <div class="card-body">
             <!--begin::Form-->
@@ -67,7 +62,6 @@
                             <div class="form-group row">
                                 <label class="col-3">Gender</label>
                                 <div class="col-9">
-                                    @*<input class="form-control form-control-solid" type="text" value="Loop Inc."/>*@
                                     <select type="text" class="form-control form-control-solid" asp-for="Employee.Gender" asp-items="Html.GetEnumSelectList<Gender>()" id="gender" required>
                                         <option>-- Select Gender --</option>
                                     </select>
@@ -81,7 +75,6 @@
                                         <input type="text" asp-for="Employee.PhoneNo" class="form-control form-control-solid" placeholder="+251" />
                                         <span asp-validation-for="Employee.PhoneNo" class="text-danger"></span>
                                     </div>
-                                    <span class="form-text text-muted">We'll never share your no with anyone else.</span>
                                 </div>
                             </div>
                             <div class="form-group row">

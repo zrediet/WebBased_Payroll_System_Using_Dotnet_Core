@@ -22,7 +22,8 @@ namespace UI.Controllers
         // GET: Overtimes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Overtimes.Include(o => o.Employee);
+            var applicationDbContext = _context.Overtimes.Include(o => o.Employee)
+                .Where(c=>c.IsDeleted ==false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -73,17 +74,48 @@ namespace UI.Controllers
                 ModelState.AddModelError("","Registering OT in future date is not allowed.");
             }
 
-            //check if the employee has already registered OT that is Active for same DATE
-            var check = _context.Overtimes.Where(c =>
-                c.EmployeeId == overtime.EmployeeId && c.Date == overtime.Date && c.IsDeleted == false);
+            //check if the employee has already registered OT that is Active for same DATE and SAME OT Type
+            var checkHolyDayOT = _context.Overtimes.Where(c =>
+                c.EmployeeId == overtime.EmployeeId && c.Date == overtime.Date &&
+                c.IsDeleted == false &&
+                c.HolyDayOT > 0);
 
-            if (check.Any())
+            if (checkHolyDayOT.Any())
             {
-                ModelState.AddModelError("","Employee has active OT in this date. If you want to change, Delete first.");
+                ModelState.AddModelError("","Employee has active Holy Day OT in this date. If you want to change, Delete first.");
             }
 
-            
+            var checkNormalOT = _context.Overtimes.Where(c =>
+                c.EmployeeId == overtime.EmployeeId &&
+                c.Date == overtime.Date &&
+                c.IsDeleted == false && 
+                c.NormalOT > 0);
 
+            if (checkNormalOT.Any())
+            {
+                ModelState.AddModelError("","Employee has active Normal OT in this date. If you want to change, Delete first.");
+            }
+
+            var checkNormalOT2 = _context.Overtimes.Where(c =>
+                c.EmployeeId == overtime.EmployeeId && c.Date == overtime.Date &&
+                c.IsDeleted == false &&
+                c.HolyDayOT == overtime.NormalOT2 && 
+                c.NormalOT2 != 0);
+
+            if (checkNormalOT2.Any())
+            {
+                ModelState.AddModelError("","Employee has active Normal OT2 in this date. If you want to change, Delete first.");
+            }
+
+            var checkWeekEndOT = _context.Overtimes.Where(c =>
+                c.EmployeeId == overtime.EmployeeId && c.Date == overtime.Date &&
+                c.IsDeleted == false &&
+                c.WeekendOT > 0);
+
+            if (checkWeekEndOT.Any())
+            {
+                ModelState.AddModelError("","Employee has active Weekend OT in this date. If you want to change, Delete first.");
+            }
 
             if (ModelState.IsValid)
             {
@@ -188,7 +220,10 @@ namespace UI.Controllers
         public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var overtime = await _context.Overtimes.FindAsync(id);
-            _context.Overtimes.Remove(overtime);
+//            _context.Overtimes.Remove(overtime);
+            overtime.IsDeleted = true;
+            overtime.DeletionTime = DateTime.Now;
+            _context.Update(overtime);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
