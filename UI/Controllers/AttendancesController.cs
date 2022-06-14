@@ -73,12 +73,13 @@ namespace UI.Controllers
 
         public async Task<IActionResult> GetAttendance(DateTime from, DateTime to, string division)
         {
-            var result = await _context.Attendances.Include(a=>a.Employee)
+            var result = await _context.Attendances.Include(a => a.Employee)
                 .Where(c => c.From >= from && c.To <= to && c.Employee.Department.Id == division && c.IsDeleted == false)
                 .ToListAsync();
 
             return View("");
         }
+
         // GET: Attendances/Details/5
         public async Task<IActionResult> Details(string id)
         {
@@ -122,37 +123,37 @@ namespace UI.Controllers
         {   
 
             //check if the Date is in a correct order
-            if (attendance.From > attendance.To)
+            if (attendance.Date > DateTime.Today)
             {
-                ModelState.AddModelError("","From Date should come before To");
-            }
-
-            if (attendance.From > DateTime.Today)
-            {
+                //ModelState.AddModelError("","From Date should come before To");
                 ModelState.AddModelError("","Payment should be paid until Today. Not Starting From Today. Please Change.");
             }
 
-            if (attendance.To > DateTime.Today)
-            {
-                var month = DateTime.Today.Month;
-                var year = DateTime.Today.Year;
+            //if (attendance.From > DateTime.Today)
+            //{
+            //    ModelState.AddModelError("","Payment should be paid until Today. Not Starting From Today. Please Change.");
+            //}
 
-                if (attendance.To.Year == year)
-                {
-                    if (attendance.To.Month != month)
-                    {
-                        ModelState.AddModelError("","Future Date Payment NOT Allowed. Please Change.");
-                    }
-                }
+            //if (attendance.To > DateTime.Today)
+            //{
+            //    var month = DateTime.Today.Month;
+            //    var year = DateTime.Today.Year;
 
-                if (attendance.To.Year != year)
-                {
-                    ModelState.AddModelError("","Year not Same. Please change");
+            //    if (attendance.To.Year == year)
+            //    {
+            //        if (attendance.To.Month != month)
+            //        {
+            //            ModelState.AddModelError("","Future Date Payment NOT Allowed. Please Change.");
+            //        }
+            //    }
+
+            //    if (attendance.To.Year != year)
+            //    {
+            //        ModelState.AddModelError("","Year not Same. Please change");
                      
-                }
-                
-                 
-            }
+            //    }}
+
+
 
             var hiredDate = _context.Employees.Where(c => c.Id == attendance.EmployeeId).Select(a => a.HireDate);
             

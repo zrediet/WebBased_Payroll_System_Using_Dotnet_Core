@@ -14,13 +14,13 @@ namespace Infrastructure.Models
         public string EmployeeId { get; set; }
 
         [Required]
-        [Display(Name = "From")] 
+        [Display(Name = "From")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime From { get; set; }
-        
+
         [Required]
-        [Display(Name = "To")] 
+        [Display(Name = "To")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd-MMM-yyyy}")]
         public DateTime To { get; set; }

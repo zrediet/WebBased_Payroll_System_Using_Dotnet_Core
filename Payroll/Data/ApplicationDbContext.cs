@@ -31,8 +31,8 @@ namespace Payroll.Data
         public DbSet<Termination> Terminations { get; set; }
         public DbSet<Overtime> Overtimes { get; set; }
 
-        public DbSet<AllowancePackage> AllowancePackages { get; set; }
-        public DbSet<AllowancePackageDetail> AllowancePackageDetails { get; set; }
+        //public DbSet<AllowancePackage> AllowancePackages { get; set; }
+        //public DbSet<AllowancePackageDetail> AllowancePackageDetails { get; set; }
 
 
     }

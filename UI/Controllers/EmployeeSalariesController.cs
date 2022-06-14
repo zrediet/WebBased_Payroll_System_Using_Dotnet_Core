@@ -69,7 +69,7 @@ namespace UI.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BasicSalary,TransportAllowance,HomeAllowance,OtherAllowance,EmployeeId,SalaryStatus,Id,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId")] EmployeeSalary employeeSalary)
+        public async Task<IActionResult> Create([Bind("BasicSalary,TransportAllowance,HomeAllowance,PositionAllowance,OtherAllowance,EmployeeId,SalaryStatus,Id,CreationTime,CreatorUserId,LastModificationTime,LastModifierUserId,IsDeleted,DeletionTime,DeleterUserId")] EmployeeSalary employeeSalary)
         {
             employeeSalary.Id = Guid.NewGuid().ToString();
             employeeSalary.CreationTime = DateTime.Today;

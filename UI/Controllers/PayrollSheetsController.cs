@@ -525,8 +525,7 @@ namespace UI.Controllers
                                         where x.IsDeleted == false && x.EmployeeId == item.Id
                                         select x).ToList();
                     //presentallowance = (decimal)Allowancesal.PresentAllowance - penality;
-
-                    //Allowance = (decimal)Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum();
+                    
                     
                     var TransportAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.TransportAllowance).Sum());
                     var HomeAllowance = Convert.ToSingle(Allowancesal.Where(p => p.IsDeleted == false).Select(P => P.HomeAllowance).Sum());
@@ -538,15 +537,32 @@ namespace UI.Controllers
                         //Allowance = Convert.ToDecimal(0 + 0 + 0);
                     }
 
-                    //var NonTaxableAll = _context.PayrollSettings
-                      //  .Where(a => a.GeneralPSett == GeneralPSett.MaxNonTaxableAllowanceAmount).Select(a => a.Value).ToList();
+                    //var NonTaxableAllowanceAmount = _context.PayrollSettings.Where(a => a.GeneralPSett == GeneralPSett.MaxNonTaxableAllowanceAmount).Select(a => a.Value).ToList();
 
                     //decimal FinalAllowanceAfterDeduction = Allowance - (decimal)NonTaxableAll[0];
 
                     //AllowanceNontax = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Allowance && p.NonTax).Select(P => P.Amount).Sum();
                     //otherdeduction = (decimal)Allowancesal.Where(p => p.AllowanceType.AllowanceCategory == AllowanceCategory.Deduction).Select(P => P.Amount).Sum();
 
-                    GrossSalary = BasicSalary + Allowance + OverTime - Family;
+                    //Gross Salary must be Basic Salary + NonTaxableAllowanceAmount + OverTime
+
+                    //decimal differenceAllowance=0;
+
+                    //if (Allowance > (decimal)NonTaxableAllowanceAmount[0])
+                    //{
+                    //    differenceAllowance = Allowance - (decimal)NonTaxableAllowanceAmount[0];
+                    //    //AllowanceNontax = differenceAllowance;
+                    //    AllowanceNontax = (decimal)NonTaxableAllowanceAmount[0];
+                         
+                    //    //GrossSalary = BasicSalary + (decimal)NonTaxableAllowanceAmount[0] + OverTime;
+                    //    GrossSalary = BasicSalary + (decimal)NonTaxableAllowanceAmount[0] + OverTime;
+                    //}
+                    //else if(Allowance <= (decimal)NonTaxableAllowanceAmount[0])
+                    //{
+                        GrossSalary = BasicSalary + Allowance + OverTime;
+                    //    GrossSalary = BasicSalary + OverTime;
+                    //    AllowanceNontax = Allowance;
+                    //}
 
 
                     if (item.IsPension)
@@ -562,9 +578,12 @@ namespace UI.Controllers
                     //}
 
                     float grosssfortax = Convert.ToSingle(GrossSalary);
+
                     var qincomtax = _context.IncomeTaxSetting
                         .Where(P => P.ActiveDate <= endDate
-                                    && P.StartingAmount <= grosssfortax && (P.EndingAmount >= grosssfortax || P.EndingAmount == 0)
+                                    && P.StartingAmount <= grosssfortax 
+                                    && (P.EndingAmount >= grosssfortax 
+                                        || P.EndingAmount == 0)
                                     && P.IsDeleted == false).ToList();
 
                     if (qincomtax.Count > 0)
@@ -597,11 +616,10 @@ namespace UI.Controllers
                     payrolls.OtherDeduction = Convert.ToSingle(OtherDeduction);
                     payrolls.NetPay = Convert.ToSingle(NetPay);
                     //payrolls.Pf = (float)pfemp;
-                    //payrolls.NonTaxableallowance = (float)AllowanceNontax;
+                    //payrolls.NonTaxableAllowance = (float)AllowanceNontax;
                     
                     //payrolls.PaymentRound = round;
                     payrolls.NoDays = WorkingDays;
-
 
                     payrolls.CreationTime = DateTime.Now;
                     payrolls.CreatorUserId = "";//User.Identity.GetUserId();

@@ -9,7 +9,12 @@ namespace UI.Controllers
         //{
         //}
         
-        public IActionResult Viewer()
+        public IActionResult PayrollReport()
+        {
+            return View();
+        }
+
+        public IActionResult BankReport()
         {
             return View();
         }

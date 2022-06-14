@@ -131,6 +131,15 @@
                                     <span asp-validation-for="Employee.PaymentPeriod" class="text-danger"></span>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label class="col-3">Payment Period</label>
+                                <div class="col-9">
+                                    <select type="text" class="form-control form-control-solid" asp-for="Employee.Department" asp-items="ViewBag.DepartmentId" id="department" required>
+                                        <option> -- Select Department --</option>
+                                    </select>
+                                    <span asp-validation-for="Employee.Department" class="text-danger"></span>
+                                </div>
+                            </div>
 
                         </div>
                         <div class="separator separator-dashed my-10"></div>
@@ -150,8 +159,8 @@
                                 <label class="col-3">Transport Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
-                                        <span class="text-danger"></span>
+                                        <input type="number" asp-for="EmployeeSalary.TransportAllowance" class="form-control form-control-solid" placeholder="0.00" required />
+                                        <span asp-validation-for="EmployeeSalary.TransportAllowance" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -159,8 +168,17 @@
                                 <label class="col-3">Home Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
-                                        <span class="text-danger"></span>
+                                        <input type="number" asp-for="EmployeeSalary.HomeAllowance" class="form-control form-control-solid" placeholder="0.00" required />
+                                        <span asp-validation-for="EmployeeSalary.HomeAllowance"class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-3">Position Allowance</label>
+                                <div class="col-9">
+                                    <div class="input-group input-group-solid">
+                                        <input type="number" asp-for="EmployeeSalary.PositionAllowance" class="form-control form-control-solid" placeholder="0.00" required />
+                                        <span asp-validation-for="EmployeeSalary.PositionAllowance" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -168,8 +186,8 @@
                                 <label class="col-3">Other Allowance</label>
                                 <div class="col-9">
                                     <div class="input-group input-group-solid">
-                                        <input type="number" class="form-control form-control-solid" placeholder="0.00" required="true" />
-                                        <span class="text-danger"></span>
+                                        <input type="number" asp-for="EmployeeSalary.OtherAllowance" class="form-control form-control-solid" placeholder="0.00" required />
+                                        <span asp-validation-for="EmployeeSalary.OtherAllowance" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +197,7 @@
                                 <div class="col-9 col-form-label">
                                     <div class="checkbox-inline">
                                         <label class="checkbox checkbox-success">
-                                            <input type="checkbox" name="Checkboxes5" />
+                                            <input type="checkbox" name="Checkboxes5" asp-for="Employee.IsPension" />
                                             <span></span>
                                             Is Pension?
                                         </label>
@@ -187,7 +205,6 @@
                                     <span class="form-text text-muted">Please select if the employee is required to pay pension</span>
                                 </div>
                             </div>
-
 
                         </div>
                         <div class="separator separator-dashed my-10"></div>

@@ -17,5 +17,16 @@ namespace Infrastructure.Models
         public string Website { get; set; }
         public string Fax { get; set; }
         public string Location { get; set; }
+
+        public DefaultAttendanceStyle DefaultAttendanceStyle { get; set; } =
+            DefaultAttendanceStyle.EveryoneIsPresentDefault;
+    }
+
+    public enum DefaultAttendanceStyle
+    {
+        [Display(Name="Everyone is Present by Default.")]
+        EveryoneIsPresentDefault,
+        [Display(Name="Register Daily Attendance for All")]
+        RegisterAllDayAttendance
     }
 }

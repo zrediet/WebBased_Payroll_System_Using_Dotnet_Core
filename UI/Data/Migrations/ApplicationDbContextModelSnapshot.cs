@@ -98,6 +98,9 @@ namespace UI.Data.Migrations
                     b.Property<string>("CreatorUserId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DefaultAttendanceStyle")
+                        .HasColumnType("int");
+
                     b.Property<string>("DeleterUserId")
                         .HasColumnType("nvarchar(max)");
 
@@ -166,6 +169,9 @@ namespace UI.Data.Migrations
 
                     b.Property<string>("LastModifierUserId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("MonthlySettlement")
+                        .HasColumnType("real");
 
                     b.Property<int>("PaymentStatus")
                         .HasColumnType("int");
@@ -374,10 +380,13 @@ namespace UI.Data.Migrations
                     b.Property<string>("EmployeeId")
                         .HasColumnType("nvarchar(36)");
 
-                    b.Property<float>("HomeAllowance")
+                    b.Property<float?>("HomeAllowance")
                         .HasColumnType("real");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsTaxable")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -386,13 +395,16 @@ namespace UI.Data.Migrations
                     b.Property<string>("LastModifierUserId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("OtherAllowance")
+                    b.Property<float?>("OtherAllowance")
                         .HasColumnType("real");
 
-                    b.Property<int>("SalaryStatus")
+                    b.Property<float?>("PositionAllowance")
+                        .HasColumnType("real");
+
+                    b.Property<int?>("SalaryStatus")
                         .HasColumnType("int");
 
-                    b.Property<float>("TransportAllowance")
+                    b.Property<float?>("TransportAllowance")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -515,6 +527,7 @@ namespace UI.Data.Migrations
                         .HasColumnType("nvarchar(36)");
 
                     b.Property<decimal>("HolyDayOT")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<bool>("IsDeleted")
@@ -527,12 +540,15 @@ namespace UI.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("NormalOT")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("NormalOT2")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("WeekendOT")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

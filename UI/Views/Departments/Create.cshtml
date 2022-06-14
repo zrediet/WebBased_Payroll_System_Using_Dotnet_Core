@@ -1,0 +1,37 @@
+﻿@model Infrastructure.Models.Department
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "_StarAdminLayout";
+}
+ 
+
+<div class="col-md-12 grid-margin stretch-card">
+   
+    <div class="card">
+        <form class="form" asp-action="Create">
+            <div class="card-body">
+                <div class="card-description">
+                    <span class="text-dark font-weight-bold mr-4">New Department</span>
+                </div>
+                <div class="row col-sm-8">
+                    <div class="form-group">
+                        <label>Department Name:</label>
+                        <input type="text" asp-for="DepartmentName" class="form-control" placeholder="Department Name" />
+                        <span class="form-text text-muted">Please enter department name</span>
+                        <span asp-validation-for="DepartmentName" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                <button asp-action="Index" asp-controller="Departments" class="btn btn-secondary">Back To List</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+
+ 
+ 

@@ -15,19 +15,19 @@ namespace UI.Controllers
         {
         }
 
-        //public class CustomReportDesignerController : ReportDesignerController
-        //{
-        //    public CustomReportDesignerController(IReportDesignerMvcControllerService controllerService) : base(controllerService)
-        //    {
-        //    }
-        //}
+        public class CustomReportDesignerController : ReportDesignerController
+        {
+            public CustomReportDesignerController(IReportDesignerMvcControllerService controllerService) : base(controllerService)
+            {
+            }
+        }
 
-        //public class CustomQueryBuilderController : QueryBuilderController
-        //{
-        //    public CustomQueryBuilderController(IQueryBuilderMvcControllerService controllerService) : base(controllerService)
-        //    {
-        //    }
-        //}
+        public class CustomQueryBuilderController : QueryBuilderController
+        {
+            public CustomQueryBuilderController(IQueryBuilderMvcControllerService controllerService) : base(controllerService)
+            {
+            }
+        }
 
     }
 }

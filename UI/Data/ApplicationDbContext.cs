@@ -28,5 +28,17 @@ namespace UI.Data
         public DbSet<Overtime> Overtimes { get; set; }
 
         
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Overtime>().Property(p=>p.HolyDayOT).HasPrecision(18,2);
+            builder.Entity<Overtime>().Property(p=>p.NormalOT).HasPrecision(18,2);
+            builder.Entity<Overtime>().Property(p=>p.NormalOT2).HasPrecision(18,2);
+            builder.Entity<Overtime>().Property(p=>p.WeekendOT).HasPrecision(18,2);
+            base.OnModelCreating(builder);
+        }
+
     }
+
+
 }

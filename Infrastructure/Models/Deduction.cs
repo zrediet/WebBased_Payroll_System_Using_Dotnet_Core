@@ -11,18 +11,19 @@ namespace Infrastructure.Models
     {
         public float Amount { get; set; }
         public DeductionType DeductionType { get; set; }
-        public PaymentStatus PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.InProgress;
 
         public virtual Employee Employee { get; set; }
         public string EmployeeId { get; set; }
+
+        public float MonthlySettlement { get; set; }
 
     }
 
     public enum DeductionType
     {
         Loan,
-        Court 
-        
+        Court
     }
 
     public enum PaymentStatus

@@ -23,6 +23,14 @@
     <link rel="stylesheet" href="~/admin/css/vertical-layout-light/style.css">
     <!-- endinject -->
     <link rel="shortcut icon" href="~/admin/images/favicon.png" />
+
+    @*DevExpressReporting*@
+    <link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+    <script src="~/js/thirdparty.bundle.js"></script>
+
+
+    @RenderSectionAsync("Head", required: false)
+
 </head>
 <body>
     <div class="container-scroller">
@@ -63,8 +71,6 @@
                                 <p class="fw-light text-muted mb-0">allenmoreno@gmail.com</p>
                             </div>
                             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                            @*<a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-message-text-outline text-primary me-2"></i> Messages</a>
-                            <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-calendar-check-outline text-primary me-2"></i> Activity</a>*@
                             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
                             <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
                         </div>
@@ -266,6 +272,7 @@
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link" asp-controller="Companies" asp-action="Index" >Company Info.</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Departments" asp-action="Index" >Departments</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="PayrollSettings" asp-action="Index">Payroll Settings</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="IncomeTaxSettings" asp-action="Index">Income Tax Setting</a></li>
                                 <li class="nav-item"> <a class="nav-link" asp-controller="Employees" asp-action="Index">Employees</a></li>
@@ -298,7 +305,8 @@
                         </a>
                         <div class="collapse" id="auth">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" > Payroll </a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Reports" asp-action="PayrollReport"> Payroll </a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-controller="Reports" asp-action="BankReport"> Bank Report </a></li>
                                 <li class="nav-item"> <a class="nav-link" > Payslip </a></li>
                                 <li class="nav-item"> <a class="nav-link" > Payroll vs Department </a></li>
                             </ul>
@@ -349,7 +357,12 @@
     <script src="~/admin/js/jquery.cookie.js" type="text/javascript"></script>
     <script src="~/admin/js/dashboard.js"></script>
     <script src="~/admin/js/Chart.roundedBarCharts.js"></script>
-    <!-- End custom js for this page-->
+<!-- End custom js for this page-->
+
+
+
+@await RenderSectionAsync("Scripts", required: false)
+
 </body>
 
 </html>

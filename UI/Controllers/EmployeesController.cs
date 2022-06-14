@@ -56,7 +56,7 @@ namespace UI.Controllers
         public IActionResult Create()
         {
             ViewBag.EmpId = GenerateEmployeeId();
-            //ViewData["ProjectId"] = new SelectList(_context.Projects.OrderBy(c=>c.ProjectName), "Id", "ProjectName");
+            ViewData["DepartmentId"] = new SelectList(_context.Departments.OrderBy(c=>c.DepartmentName), "Id", "DepartmentName");
             //ViewData["SubProjectId"] = new SelectList(_context.SubProjects.OrderBy(c=>c.SubProjectName), "Id", "SubProjectName");
             //ViewData["DivisionId"] = new SelectList(_context.Divisions.OrderBy(c=>c.DivisionName), "Id", "DivisionName");
             return View();
@@ -78,6 +78,11 @@ namespace UI.Controllers
             //Employee Salary
             registration.EmployeeSalary.Id = Guid.NewGuid().ToString();
             
+            registration.EmployeeSalary.PositionAllowance = Convert.ToSingle(Request.Form["EmployeeSalary.PositionAllowance"].ToString());
+            registration.EmployeeSalary.HomeAllowance = Convert.ToSingle(Request.Form["EmployeeSalary.HomeAllowance"].ToString());
+            registration.EmployeeSalary.TransportAllowance = Convert.ToSingle(Request.Form["EmployeeSalary.TransportAllowance"].ToString());
+            registration.EmployeeSalary.OtherAllowance = Convert.ToSingle(Request.Form["EmployeeSalary.OtherAllowance"].ToString());
+
             registration.EmployeeSalary.EmployeeId = empSystemID;
             registration.EmployeeSalary.CreationTime = DateTime.Today;
             registration.EmployeeSalary.IsDeleted = false;

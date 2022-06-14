@@ -9,8 +9,6 @@ namespace Infrastructure.Models
 {
     public class EmployeeSalary : FullAuditEntity
     {
-        
-        
         public virtual Employee Employee { get; set; }
         public string EmployeeId { get; set; }
 
@@ -18,13 +16,14 @@ namespace Infrastructure.Models
         [Required]
         public float BasicSalary { get; set; }
 
-        
-        public float TransportAllowance { get; set; }
-        public float HomeAllowance { get; set; }
-        public float OtherAllowance { get; set; }
+        public float? TransportAllowance { get; set; }
+        public float? HomeAllowance { get; set; }
+        public float? PositionAllowance { get; set; }
+        public float? OtherAllowance { get; set; }
 
 
-        public SalaryStatus SalaryStatus { get; set; }
+        public SalaryStatus? SalaryStatus { get; set; }
+        public bool IsTaxable { get; set; } = false;
     }
 
     public enum SalaryStatus
